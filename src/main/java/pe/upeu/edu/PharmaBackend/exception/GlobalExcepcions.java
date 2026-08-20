@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-public class ManejadorglobalExcepcions {
+public class GlobalExcepcions {
 
     @ExceptionHandler(RecursosNoEncontradosException.class)
     public ResponseEntity<ErrorResponseDTO> handleRecursoNoEncontrado(

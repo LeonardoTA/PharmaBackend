@@ -1,15 +1,15 @@
-C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend - 2\src\main\java\pe\upeu\edu\PharmaBackend\controller\CategoriaController.java
-C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend - 2\src\main\java\pe\upeu\edu\PharmaBackend\controller\HealthController.java
-C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend - 2\src\main\java\pe\upeu\edu\PharmaBackend\dto\CategoriaDTO.java
-C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend - 2\src\main\java\pe\upeu\edu\PharmaBackend\dto\CategoriaRequestDTO.java
-C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend - 2\src\main\java\pe\upeu\edu\PharmaBackend\dto\CategoriaResponseDTO.java
-C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend - 2\src\main\java\pe\upeu\edu\PharmaBackend\dto\ErrorResponseDTO.java
-C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend - 2\src\main\java\pe\upeu\edu\PharmaBackend\entity\Categoria.java
-C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend - 2\src\main\java\pe\upeu\edu\PharmaBackend\exception\ManejadorglobalExcepcions.java
-C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend - 2\src\main\java\pe\upeu\edu\PharmaBackend\exception\RecursosNoEncontradosException.java
-C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend - 2\src\main\java\pe\upeu\edu\PharmaBackend\exception\ReglaNegocioException.java
-C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend - 2\src\main\java\pe\upeu\edu\PharmaBackend\PharmaBackendApplication.java
-C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend - 2\src\main\java\pe\upeu\edu\PharmaBackend\repository\CategoriaRepository.java
-C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend - 2\src\main\java\pe\upeu\edu\PharmaBackend\service\generic\CrudService.java
-C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend - 2\src\main\java\pe\upeu\edu\PharmaBackend\service\impl\CategoriaServiceImpl.java
-C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend - 2\src\main\java\pe\upeu\edu\PharmaBackend\service\service\CategoriaService.java
+C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend_2\src\main\java\pe\upeu\edu\PharmaBackend\controller\CategoriaController.java
+C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend_2\src\main\java\pe\upeu\edu\PharmaBackend\controller\HealthController.java
+C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend_2\src\main\java\pe\upeu\edu\PharmaBackend\dto\CategoriaDTO.java
+C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend_2\src\main\java\pe\upeu\edu\PharmaBackend\dto\CategoriaRequestDTO.java
+C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend_2\src\main\java\pe\upeu\edu\PharmaBackend\dto\CategoriaResponseDTO.java
+C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend_2\src\main\java\pe\upeu\edu\PharmaBackend\dto\ErrorResponseDTO.java
+C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend_2\src\main\java\pe\upeu\edu\PharmaBackend\entity\Categoria.java
+C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend_2\src\main\java\pe\upeu\edu\PharmaBackend\exception\GlobalExcepcions.java
+C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend_2\src\main\java\pe\upeu\edu\PharmaBackend\exception\RecursosNoEncontradosException.java
+C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend_2\src\main\java\pe\upeu\edu\PharmaBackend\exception\ReglaNegocioException.java
+C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend_2\src\main\java\pe\upeu\edu\PharmaBackend\PharmaBackendApplication.java
+C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend_2\src\main\java\pe\upeu\edu\PharmaBackend\repository\CategoriaRepository.java
+C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend_2\src\main\java\pe\upeu\edu\PharmaBackend\service\generic\CrudService.java
+C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend_2\src\main\java\pe\upeu\edu\PharmaBackend\service\impl\CategoriaServiceImpl.java
+C:\Users\graci\IDE-Class\Trabajos_Clase\PharmaBackend_2\src\main\java\pe\upeu\edu\PharmaBackend\service\service\CategoriaService.java
