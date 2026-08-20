@@ -1,9 +1,15 @@
 pe\upeu\edu\PharmaBackend\controller\HealthController.class
 pe\upeu\edu\PharmaBackend\service\service\CategoriaService.class
+pe\upeu\edu\PharmaBackend\dto\CategoriaResponseDTO.class
 pe\upeu\edu\PharmaBackend\entity\Categoria.class
-pe\upeu\edu\PharmaBackend\repository\CategoriaRepository.class
-pe\upeu\edu\PharmaBackend\controller\CategoriaController.class
 pe\upeu\edu\PharmaBackend\service\impl\CategoriaServiceImpl.class
 pe\upeu\edu\PharmaBackend\dto\CategoriaDTO.class
 pe\upeu\edu\PharmaBackend\PharmaBackendApplication.class
 pe\upeu\edu\PharmaBackend\service\generic\CrudService.class
+pe\upeu\edu\PharmaBackend\dto\CategoriaRequestDTO.class
+pe\upeu\edu\PharmaBackend\dto\ErrorResponseDTO.class
+pe\upeu\edu\PharmaBackend\exception\ManejadorglobalExcepcions.class
+pe\upeu\edu\PharmaBackend\repository\CategoriaRepository.class
+pe\upeu\edu\PharmaBackend\controller\CategoriaController.class
+pe\upeu\edu\PharmaBackend\exception\ReglaNegocioException.class
+pe\upeu\edu\PharmaBackend\exception\RecursosNoEncontradosException.class

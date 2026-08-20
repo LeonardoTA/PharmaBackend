@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoriaDTO {
+public class CategoriaResponseDTO {
     private Long id;
     private String nombre;
     private String descripcion;
