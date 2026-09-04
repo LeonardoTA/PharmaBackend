@@ -24,8 +24,8 @@ public class Venta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private LocalDateTime fecha;
+    @Column(name = "fecha_registro", nullable = false, updatable = false)
+    private LocalDateTime fechaRegistro;
 
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal total;
@@ -50,9 +50,8 @@ public class Venta {
 
     @PrePersist
     public void prePersist() {
-
-        if (fecha == null) {
-            fecha = LocalDateTime.now();
+        if (fechaRegistro == null) {
+            fechaRegistro = LocalDateTime.now();
         }
 
         if (estado == null) {

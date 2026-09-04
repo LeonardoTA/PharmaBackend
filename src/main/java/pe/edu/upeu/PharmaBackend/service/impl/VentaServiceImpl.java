@@ -51,7 +51,7 @@ public class VentaServiceImpl implements VentaService {
         Venta venta = new Venta();
 
         venta.setCliente(cliente);
-        venta.setFecha(LocalDateTime.now());
+        venta.setFechaRegistro(LocalDateTime.now());
         venta.setEstado(EstadoVenta.REGISTRADA);
 
         BigDecimal total = BigDecimal.ZERO;
@@ -126,7 +126,7 @@ public class VentaServiceImpl implements VentaService {
 
         return new VentaResponseDTO(
                 venta.getId(),
-                venta.getFecha(),
+                venta.getFechaRegistro(),
                 venta.getCliente().getId(),
                 clienteNombre,
                 venta.getEstado().name(),

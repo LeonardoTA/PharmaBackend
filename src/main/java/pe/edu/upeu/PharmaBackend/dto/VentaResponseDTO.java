@@ -16,7 +16,7 @@ import java.util.List;
 public class VentaResponseDTO {
 
     private Long id;
-    private LocalDateTime fecha;
+    private LocalDateTime fechaRegistro;
 
     private Long clienteId;
     private String clienteNombre;
