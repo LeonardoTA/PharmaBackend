@@ -29,4 +29,30 @@ public interface VentaRepository extends JpaRepository<Venta, Long> {
             @Param("desde") LocalDateTime desde,
             @Param("hasta") LocalDateTime hasta,
             Sort sort);
+
+    @Query("""
+            select new pe.edu.upeu.PharmaBackend.dto.reporte.VentaPorCategoriaDTO(cat.id, cat.nombre, sum(d.cantidad), sum(d.subtotal))
+            from DetalleVenta d join d.venta v join d.producto p join p.categoria cat
+            where v.estado = pe.edu.upeu.PharmaBackend.enums.EstadoVenta.REGISTRADA
+              and (:desde is null or v.fechaRegistro >= :desde)
+              and (:hasta is null or v.fechaRegistro <= :hasta)
+            group by cat.id, cat.nombre
+            order by sum(d.subtotal) desc
+            """)
+    List<pe.edu.upeu.PharmaBackend.dto.reporte.VentaPorCategoriaDTO> reporteVentasPorCategoria(
+            @Param("desde") LocalDateTime desde, 
+            @Param("hasta") LocalDateTime hasta);
+
+    @Query("""
+            select new pe.edu.upeu.PharmaBackend.dto.reporte.ProductoMasVendidoDTO(p.id, p.nombre, cat.nombre, sum(d.cantidad), sum(d.subtotal))
+            from DetalleVenta d join d.venta v join d.producto p join p.categoria cat
+            where v.estado = pe.edu.upeu.PharmaBackend.enums.EstadoVenta.REGISTRADA
+              and (:desde is null or v.fechaRegistro >= :desde)
+              and (:hasta is null or v.fechaRegistro <= :hasta)
+            group by p.id, p.nombre, cat.nombre
+            order by sum(d.cantidad) desc
+            """)
+    List<pe.edu.upeu.PharmaBackend.dto.reporte.ProductoMasVendidoDTO> reporteProductosMasVendidos(
+            @Param("desde") LocalDateTime desde, 
+            @Param("hasta") LocalDateTime hasta);
 }
