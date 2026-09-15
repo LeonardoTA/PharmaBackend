@@ -1,0 +1,342 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "PharmaBackend Architecture",
+    "output": "pharmabackend-architecture.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "full-flow",
+        "label": "End-to-End Request",
+        "focus": [
+          "client-web",
+          "cors-filter",
+          "controllers",
+          "services",
+          "repositories",
+          "oracle-db"
+        ],
+        "note": "Traza el flujo principal desde el cliente frontend hasta la base de datos Oracle."
+      },
+      {
+        "id": "error-handling",
+        "label": "Manejo de Errores",
+        "focus": [
+          "controllers",
+          "exception-handler"
+        ],
+        "note": "Interceptacion global de excepciones de negocio y validacion de DTOs."
+      },
+      {
+        "id": "data-tier",
+        "label": "Capa de Datos y Persistencia",
+        "focus": [
+          "services",
+          "repositories",
+          "domain-entities",
+          "oracle-db"
+        ],
+        "note": "Mapeo de entidades JPA y ejecucion de transacciones hacia Oracle FREEPDB1."
+      }
+    ],
+    "repository": {
+      "url": "https://github.com/LeonardoTA/PharmaBackend",
+      "provider": "github",
+      "revision": "af594876234c2f530eb4852bf24ef98c3b1eff85"
+    }
+  },
+  "components": [
+    {
+      "id": "client-web",
+      "type": "frontend",
+      "label": "Angular Client",
+      "sublabel": "SPA :4200",
+      "brand": "angular",
+      "pos": [
+        50,
+        240
+      ],
+      "size": [
+        160,
+        60
+      ]
+    },
+    {
+      "id": "swagger-docs",
+      "type": "frontend",
+      "label": "Swagger UI",
+      "sublabel": "OpenAPI /docs",
+      "pos": [
+        50,
+        360
+      ],
+      "size": [
+        140,
+        60
+      ]
+    },
+    {
+      "id": "cors-filter",
+      "type": "security",
+      "label": "CORS & Security",
+      "sublabel": "CorsConfig :8081",
+      "tag": "WebMvcConfigurer",
+      "pos": [
+        260,
+        240
+      ],
+      "size": [
+        140,
+        60
+      ],
+      "sources": [
+        {
+          "path": "src/main/java/pe/edu/upeu/PharmaBackend/config/CorsConfig.java",
+          "line": 8,
+          "label": "CorsConfig"
+        }
+      ]
+    },
+    {
+      "id": "controllers",
+      "type": "backend",
+      "label": "REST Controllers",
+      "sublabel": "/api/v1/* Endpoints",
+      "brand": "spring",
+      "tag": "WebMVC",
+      "pos": [
+        470,
+        240
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "path": "src/main/java/pe/edu/upeu/PharmaBackend/controller/VentaController.java",
+          "line": 17,
+          "label": "VentaController"
+        }
+      ]
+    },
+    {
+      "id": "exception-handler",
+      "type": "backend",
+      "label": "Exception Handler",
+      "sublabel": "@ControllerAdvice",
+      "tag": "ErrorResponseDTO",
+      "pos": [
+        470,
+        110
+      ],
+      "size": [
+        170,
+        60
+      ],
+      "sources": [
+        {
+          "path": "src/main/java/pe/edu/upeu/PharmaBackend/exception/GlobalExceptionHandler.java",
+          "line": 12,
+          "label": "GlobalExceptionHandler"
+        }
+      ]
+    },
+    {
+      "id": "services",
+      "type": "backend",
+      "label": "Service Layer",
+      "sublabel": "CrudService + Impl",
+      "brand": "spring",
+      "tag": "@Service",
+      "pos": [
+        690,
+        240
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "path": "src/main/java/pe/edu/upeu/PharmaBackend/service/generic/CrudService.java",
+          "line": 5,
+          "label": "CrudService"
+        }
+      ]
+    },
+    {
+      "id": "repositories",
+      "type": "backend",
+      "label": "Data Access Layer",
+      "sublabel": "Spring Data JPA",
+      "tag": "@Repository",
+      "pos": [
+        910,
+        240
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "path": "src/main/java/pe/edu/upeu/PharmaBackend/repository/VentaRepository.java",
+          "line": 9,
+          "label": "VentaRepository"
+        }
+      ]
+    },
+    {
+      "id": "domain-entities",
+      "type": "database",
+      "label": "Domain Entities",
+      "sublabel": "Venta, Producto, Cliente",
+      "tag": "JPA Entities",
+      "pos": [
+        910,
+        360
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "sources": [
+        {
+          "path": "src/main/java/pe/edu/upeu/PharmaBackend/entity/Venta.java",
+          "line": 15,
+          "label": "Venta Entity"
+        }
+      ]
+    },
+    {
+      "id": "oracle-db",
+      "type": "database",
+      "label": "Oracle Database",
+      "sublabel": "FREEPDB1 :1522",
+      "tag": "pharmaDB (ojdbc11)",
+      "pos": [
+        1130,
+        240
+      ],
+      "size": [
+        150,
+        60
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Spring Boot Application (PharmaBackend :8081)",
+      "wraps": [
+        "cors-filter",
+        "controllers",
+        "exception-handler",
+        "services",
+        "repositories",
+        "domain-entities"
+      ]
+    },
+    {
+      "kind": "security-group",
+      "label": "Oracle Database Engine (localhost:1522)",
+      "wraps": [
+        "oracle-db"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "client-to-cors",
+      "from": "client-web",
+      "to": "cors-filter",
+      "label": "HTTP/REST",
+      "variant": "emphasis"
+    },
+    {
+      "id": "swagger-to-cors",
+      "from": "swagger-docs",
+      "to": "cors-filter",
+      "label": "HTTP",
+      "variant": "default"
+    },
+    {
+      "id": "cors-to-controllers",
+      "from": "cors-filter",
+      "to": "controllers",
+      "label": "Dispatched",
+      "variant": "emphasis"
+    },
+    {
+      "id": "controllers-to-exceptions",
+      "from": "controllers",
+      "to": "exception-handler",
+      "label": "On Error",
+      "variant": "dashed",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "controllers-to-services",
+      "from": "controllers",
+      "to": "services",
+      "label": "DTO Request",
+      "variant": "emphasis"
+    },
+    {
+      "id": "services-to-repos",
+      "from": "services",
+      "to": "repositories",
+      "label": "Transactions",
+      "variant": "emphasis"
+    },
+    {
+      "id": "repos-to-entities",
+      "from": "repositories",
+      "to": "domain-entities",
+      "label": "Maps",
+      "variant": "dashed",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 24
+    },
+    {
+      "id": "repos-to-oracle",
+      "from": "repositories",
+      "to": "oracle-db",
+      "label": "JDBC / SQL",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Presentacion & Entrada",
+      "items": [
+        "Cliente Web Angular (puerto 4200) y Swagger UI (/swagger-ui.html)",
+        "Filtro CORS configurado para origenes cruzados en CorsConfig",
+        "GlobalExceptionHandler intercepta validaciones y errores HTTP"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Logica de Negocio",
+      "items": [
+        "Controladores REST exponen endpoints en /api/v1/*",
+        "Capa de servicios implementa contrato generico CrudService",
+        "Transformacion de DTOs y validacion de reglas de negocio"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Datos & Persistencia",
+      "items": [
+        "Spring Data JPA abstrae operaciones CRUD y reportes agregados",
+        "Entidades relacionales (Venta, DetalleVenta, Producto, Cliente)",
+        "Oracle Database FREEPDB1 en puerto 1522 con dialecto OracleDialect"
+      ]
+    }
+  ]
+}
