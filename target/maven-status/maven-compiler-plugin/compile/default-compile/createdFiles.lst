@@ -1,8 +1,11 @@
+pe\edu\upeu\PharmaBackend\mapper\VentaMapper.class
 pe\edu\upeu\PharmaBackend\service\impl\ClienteServiceImpl.class
+pe\edu\upeu\PharmaBackend\mapper\ClienteMapper.class
 pe\edu\upeu\PharmaBackend\controller\ProductoController.class
 pe\edu\upeu\PharmaBackend\repository\DetalleVentaRepository.class
 pe\edu\upeu\PharmaBackend\service\service\ProductoService.class
 pe\edu\upeu\PharmaBackend\repository\VentaRepository.class
+pe\edu\upeu\PharmaBackend\mapper\ProductoMapper.class
 pe\edu\upeu\PharmaBackend\dto\CategoriaRequestDTO.class
 pe\edu\upeu\PharmaBackend\dto\ClienteResponseDTO.class
 pe\edu\upeu\PharmaBackend\service\service\VentaService.class
@@ -44,4 +47,5 @@ pe\edu\upeu\PharmaBackend\PharmaBackendApplication.class
 pe\edu\upeu\PharmaBackend\repository\CategoriaRepository.class
 pe\edu\upeu\PharmaBackend\dto\VentaResponseDTO.class
 pe\edu\upeu\PharmaBackend\dto\CategoriaResponseDTO.class
+pe\edu\upeu\PharmaBackend\mapper\CategoriaMapper.class
 pe\edu\upeu\PharmaBackend\dto\CategoriaDTO.class
