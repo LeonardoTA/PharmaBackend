@@ -7,6 +7,8 @@
 
 **Resultado:** 28 casos, 62 peticiones/comprobaciones registradas; todos pasan. La suite Maven ejecutó además 10 pruebas sin fallos.
 
+**Documento de entrega:** informe y evidencias integrados en un solo PDF: `Tequen_LP2_S10_Autonoma.pdf` (copia del repositorio: `docs/informe-s10.pdf`). Todas las páginas son A4 y conservan la tipografía Arial y los márgenes del entregable anterior.
+
 ## Entorno y precondiciones
 
 - API principal: `http://localhost:8081/api/v1`; Swagger: `http://localhost:8081/swagger-ui/index.html`. El proyecto utiliza 8081; la colección permite cambiar `baseUrl` para usar 8080.
