@@ -25,3 +25,6 @@ replay_pid*
 
 # Archify documentation and assets
 Structure-Archify/
+
+# Claves aleatorias y tokens locales de las pruebas.
+/tmp/seguridad-privado/
