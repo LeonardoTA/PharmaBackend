@@ -1,0 +1,65 @@
+{
+  "id": "C-01",
+  "title": "Preflight desde SPA localhost:4200",
+  "group": "CORS",
+  "who": "vendedor",
+  "method": "OPTIONS + GET",
+  "path": "/auth/me",
+  "expectedStatus": 200,
+  "expectedMessage": "Preflight 200 y petición real 200 sin error CORS",
+  "status": 200,
+  "body": {
+    "id": 2,
+    "username": "vendedor",
+    "empleadoId": 2,
+    "empleadoNombre": "Lucia Ramos Cutipa",
+    "cargo": "Vendedora",
+    "roles": [
+      "VENDEDOR"
+    ],
+    "permisos": [
+      "CATALOGO_LEER",
+      "CLIENTES_ESCRIBIR",
+      "CLIENTES_LEER",
+      "VENTAS_LEER",
+      "VENTAS_REGISTRAR"
+    ],
+    "estado": true,
+    "fechaCreacion": "2026-10-17T16:57:52.705694"
+  },
+  "pass": true,
+  "authorization": "Bearer",
+  "evidence": "C-01_01_red.png",
+  "additionalEvidence": "C-01_02_preflight.png",
+  "extraScreens": [
+    "C-01_02_preflight.png",
+    "C-01_03_get_headers.png",
+    "C-01_04_get_body.png"
+  ],
+  "preflight": {
+    "status": 200,
+    "headers": {
+      "Access-Control-Allow-Credentials": "true",
+      "Access-Control-Allow-Headers": "authorization",
+      "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+      "Access-Control-Allow-Origin": "http://localhost:4200",
+      "Access-Control-Expose-Headers": "Location",
+      "Access-Control-Max-Age": "3600",
+      "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+      "Connection": "keep-alive",
+      "Content-Length": "0",
+      "Date": "Sat, 17 Oct 2026 17:15:22 GMT",
+      "Expires": "0",
+      "Keep-Alive": "timeout=60",
+      "Pragma": "no-cache",
+      "Vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "0"
+    }
+  },
+  "requestMethods": [
+    "GET",
+    "OPTIONS"
+  ]
+}

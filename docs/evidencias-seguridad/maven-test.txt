@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: pe.edu.upeu.PharmaBackend.PharmaBackendApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.16 s -- in pe.edu.upeu.PharmaBackend.PharmaBackendApplicationTests
+
+-------------------------------------------------------------------------------
+Test set: pe.edu.upeu.PharmaBackend.security.JwtServiceTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.381 s -- in pe.edu.upeu.PharmaBackend.security.JwtServiceTest
+
+-------------------------------------------------------------------------------
+Test set: pe.edu.upeu.PharmaBackend.security.PermisosPorRolTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in pe.edu.upeu.PharmaBackend.security.PermisosPorRolTest
