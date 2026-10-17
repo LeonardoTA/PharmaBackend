@@ -127,6 +127,9 @@ public class VentaServiceImpl implements VentaService {
             String ordenarPor,
             String direccion) {
 
+        long inicio = System.currentTimeMillis();
+        log.info("Inicio buscar ventas | clienteId={} | estado={} | desde={} | hasta={} | ordenarPor={} | direccion={}", clienteId, estado, desde, hasta, ordenarPor, direccion);
+
         if (desde != null && hasta != null && desde.isAfter(hasta)) {
             throw new ReglaNegocioException(
                     "El rango de fechas es inválido: 'desde' (" + desde
@@ -144,8 +147,7 @@ public class VentaServiceImpl implements VentaService {
                 .map(this::convertirResponse)
                 .toList();
 
-        log.info("Búsqueda de ventas | clienteId={} | estado={} | desde={} | hasta={} | filas={}",
-                clienteId, estado, desde, hasta, resultado.size());
+        log.info("Fin buscar ventas | clienteId={} | estado={} | desde={} | hasta={} | ordenarPor={} | direccion={} | filas={} | duracionMs={}", clienteId, estado, desde, hasta, ordenarPor, direccion, resultado.size(), System.currentTimeMillis() - inicio);
 
         return resultado;
     }

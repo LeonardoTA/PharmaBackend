@@ -1,0 +1,4 @@
+SELECT u.username,u.password,r.nombre AS rol FROM usuarios u JOIN usuario_roles ur ON ur.usuario_id=u.id JOIN roles r ON r.id=ur.rol_id WHERE u.username='maria'
+
+USERNAME | PASSWORD | ROL
+maria | $2a$10$N0gZdM17KKt7uynqos285OM6NXNLLGlekn1l1bmj.F6/qMErgfLQu | VENDEDOR

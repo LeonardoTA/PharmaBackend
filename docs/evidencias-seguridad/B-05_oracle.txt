@@ -1,0 +1,5 @@
+SELECT u.username,r.nombre AS rol FROM usuarios u JOIN usuario_roles ur ON ur.usuario_id=u.id JOIN roles r ON r.id=ur.rol_id WHERE u.username='vendedor' ORDER BY r.nombre
+
+USERNAME | ROL
+vendedor | ALMACENERO
+vendedor | VENDEDOR

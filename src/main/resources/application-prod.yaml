@@ -23,3 +23,13 @@ springdoc:
 
   api-docs:
     enabled: false
+
+logging:
+  level:
+    pe.edu.upeu.PharmaBackend: INFO
+    root: WARN
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiracion-minutos: ${JWT_EXPIRACION_MINUTOS:60}

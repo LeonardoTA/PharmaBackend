@@ -1,0 +1,2682 @@
+{
+  "info": {
+    "name": "PharmaSoft - S10 Seguridad",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Actividad autónoma. Ejecutar en orden con cuentas de clase; María debe comenzar sin usuario. Instancia 8082: otra clave y TTL 1 min. Esperar 61 s para T-04. CORS se evidencia también desde la SPA. Las variables token exportadas están vacías. Ver docs/matriz-seguridad-s10.md."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "alternateBaseUrl",
+      "value": "http://localhost:8082/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "tokenAdmin",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "tokenVendedor",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "tokenAlmacen",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "tokenSupervisor",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "tokenVencido",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "tokenNuevo",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "tokenAlterado",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "tokenVenceEn",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "categoriaId",
+      "value": "32",
+      "type": "string"
+    },
+    {
+      "key": "productoId",
+      "value": "17",
+      "type": "string"
+    },
+    {
+      "key": "clienteId",
+      "value": "10",
+      "type": "string"
+    },
+    {
+      "key": "ventaId",
+      "value": "16",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Preparación del token temporal",
+      "item": [
+        {
+          "name": "Emitir token de un minuto (esperar 61 segundos antes de T-04)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{alternateBaseUrl}}/auth/login",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"vendedor\",\n  \"password\": \"Vendedor2026*\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Login temporal 200\",()=>pm.response.to.have.status(200));",
+                  "if(pm.response.code===200){pm.collectionVariables.set(\"tokenVencido\",pm.response.json().token);pm.collectionVariables.set(\"tokenVenceEn\",Date.now()+61000);}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "A-01 - Autenticación",
+      "item": [
+        {
+          "name": "Login admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"Admin2026*\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));",
+                  "if(pm.response.code===200)pm.collectionVariables.set(\"tokenAdmin\",pm.response.json().token);",
+                  "pm.test(\"Roles y permisos presentes\",()=>{const d=pm.response.json();pm.expect(d.roles).to.be.an(\"array\").that.is.not.empty;pm.expect(d.permisos).to.be.an(\"array\").that.is.not.empty;});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login vendedor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"vendedor\",\n  \"password\": \"Vendedor2026*\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));",
+                  "if(pm.response.code===200)pm.collectionVariables.set(\"tokenVendedor\",pm.response.json().token);",
+                  "pm.test(\"Roles y permisos presentes\",()=>{const d=pm.response.json();pm.expect(d.roles).to.be.an(\"array\").that.is.not.empty;pm.expect(d.permisos).to.be.an(\"array\").that.is.not.empty;});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login almacen",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"almacen\",\n  \"password\": \"Almacen2026*\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));",
+                  "if(pm.response.code===200)pm.collectionVariables.set(\"tokenAlmacen\",pm.response.json().token);",
+                  "pm.test(\"Roles y permisos presentes\",()=>{const d=pm.response.json();pm.expect(d.roles).to.be.an(\"array\").that.is.not.empty;pm.expect(d.permisos).to.be.an(\"array\").that.is.not.empty;});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login supervisor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"supervisor\",\n  \"password\": \"Supervisor2026*\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));",
+                  "if(pm.response.code===200)pm.collectionVariables.set(\"tokenSupervisor\",pm.response.json().token);",
+                  "pm.test(\"Roles y permisos presentes\",()=>{const d=pm.response.json();pm.expect(d.roles).to.be.an(\"array\").that.is.not.empty;pm.expect(d.permisos).to.be.an(\"array\").that.is.not.empty;});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "A-02 - Autenticación",
+      "item": [
+        {
+          "name": "Usuario inexistente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"carmen\",\n  \"password\": \"Clave2026*\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 401\",()=>pm.response.to.have.status(401));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"Usuario o contraseña incorrectos\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Contraseña incorrecta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"vendedor\",\n  \"password\": \"ClaveEquivocada1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 401\",()=>pm.response.to.have.status(401));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"Usuario o contraseña incorrectos\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "A-03 - Autenticación",
+      "item": [
+        {
+          "name": "Cuenta inactiva",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"inactivo\",\n  \"password\": \"Inactivo2026*\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 401\",()=>pm.response.to.have.status(401));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"Usuario o contraseña incorrectos\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "A-04 - Autenticación",
+      "item": [
+        {
+          "name": "Usuario en mayúsculas",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"VENDEDOR\",\n  \"password\": \"Vendedor2026*\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));",
+                  "if(pm.response.code===200)pm.collectionVariables.set(\"tokenVendedor\",pm.response.json().token);",
+                  "pm.test(\"Roles y permisos presentes\",()=>{const d=pm.response.json();pm.expect(d.roles).to.be.an(\"array\").that.is.not.empty;pm.expect(d.permisos).to.be.an(\"array\").that.is.not.empty;});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "T-01 - Token",
+      "item": [
+        {
+          "name": "Token sin Bearer",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{tokenVendedor}}"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/me",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 401\",()=>pm.response.to.have.status(401));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"Debe iniciar sesión\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "T-02 - Token",
+      "item": [
+        {
+          "name": "Payload alterado",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/auth/me",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAlterado}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 401\",()=>pm.response.to.have.status(401));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"El token no es válido\"));"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const p=pm.collectionVariables.get(\"tokenVendedor\").split(\".\");p[1]=(p[1][0]===\"a\"?\"b\":\"a\")+p[1].slice(1);pm.collectionVariables.set(\"tokenAlterado\",p.join(\".\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "T-03 - Token",
+      "item": [
+        {
+          "name": "Firma de otra clave",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{alternateBaseUrl}}/auth/me",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 401\",()=>pm.response.to.have.status(401));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"El token no es válido\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "T-05 - Token",
+      "item": [
+        {
+          "name": "Identidad y claims comprobados",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/auth/me",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));",
+                  "pm.test(\"Claims sin datos sensibles\",()=>{const p=JSON.parse(atob(pm.collectionVariables.get(\"tokenVendedor\").split(\".\")[1].replace(/-/g,\"+\").replace(/_/g,\"/\")));pm.expect(Object.keys(p).sort()).to.eql([\"authorities\",\"exp\",\"iat\",\"sub\"]);pm.expect(p.sub).to.eql(\"vendedor\");pm.expect(p.exp-p.iat).to.eql(3600);});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "P-01 - Permisos",
+      "item": [
+        {
+          "name": "Vendedor POST categorías",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/categorias",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Cuidado diario\",\n  \"descripcion\": \"Productos de cuidado personal\",\n  \"estado\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 403\",()=>pm.response.to.have.status(403));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"No tiene permisos\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Vendedor PUT categorías",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/categorias/32",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Cuidado diario\",\n  \"descripcion\": \"Productos de cuidado personal\",\n  \"estado\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 403\",()=>pm.response.to.have.status(403));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"No tiene permisos\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Vendedor DELETE categorías",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/categorias/32",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 403\",()=>pm.response.to.have.status(403));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"No tiene permisos\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "P-02 - Permisos",
+      "item": [
+        {
+          "name": "Almacén consulta clientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/clientes",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAlmacen}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 403\",()=>pm.response.to.have.status(403));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"No tiene permisos\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Almacén registra venta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/ventas",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAlmacen}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clienteId\": 10,\n  \"detalles\": [\n    {\n      \"productoId\": 17,\n      \"cantidad\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 403\",()=>pm.response.to.have.status(403));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"No tiene permisos\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "P-03 - Permisos",
+      "item": [
+        {
+          "name": "Reporte restringido vendedor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/reportes/productos-mas-vendidos",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 403\",()=>pm.response.to.have.status(403));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"No tiene permisos\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Reporte restringido almacen",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/reportes/productos-mas-vendidos",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAlmacen}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 403\",()=>pm.response.to.have.status(403));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"No tiene permisos\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "P-04 - Permisos",
+      "item": [
+        {
+          "name": "Admin categorias",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/categorias/32",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Admin productos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/productos/17",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Admin clientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/clientes/10",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Admin ventas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/ventas/16",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Admin reportes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/reportes/productos-mas-vendidos?desde=2026-10-17&hasta=2026-10-17",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Admin usuarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/usuarios",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Admin empleados",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/empleados",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Admin roles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/roles",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "U-01 - Usuarios",
+      "item": [
+        {
+          "name": "Contraseña sin número",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/usuarios",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"maria\",\n  \"password\": \"abcdefgh\",\n  \"empleadoId\": 6,\n  \"rolIds\": [\n    2\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 400\",()=>pm.response.to.have.status(400));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"número\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Roles vacíos al crear",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/usuarios",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"maria\",\n  \"password\": \"Maria2026*\",\n  \"empleadoId\": 6,\n  \"rolIds\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 400\",()=>pm.response.to.have.status(400));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"Debe asignar\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "U-02 - Usuarios",
+      "item": [
+        {
+          "name": "Empleado con cuenta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/usuarios",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"maria\",\n  \"password\": \"Maria2026*\",\n  \"empleadoId\": 2,\n  \"rolIds\": [\n    2\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 409\",()=>pm.response.to.have.status(409));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"ya tiene un usuario\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Alta de María Huamán",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/usuarios",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"maria\",\n  \"password\": \"Maria2026*\",\n  \"empleadoId\": 6,\n  \"rolIds\": [\n    2\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 201\",()=>pm.response.to.have.status(201));",
+                  "pm.test(\"No expone password\",()=>pm.expect(pm.response.json()).not.to.have.property(\"password\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "A-05 - Autenticación",
+      "item": [
+        {
+          "name": "Propio: login vacío",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"\",\n  \"password\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 400\",()=>pm.response.to.have.status(400));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"obligatorio\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "T-06 - Token",
+      "item": [
+        {
+          "name": "Propio: sin Authorization",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/auth/me",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 401\",()=>pm.response.to.have.status(401));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"Debe iniciar sesión\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "P-05 - Permisos",
+      "item": [
+        {
+          "name": "Propio: unión de permisos supervisor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/categorias/32",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenSupervisor}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Propio: unión de permisos supervisor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/clientes/10",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenSupervisor}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "U-03 - Usuarios",
+      "item": [
+        {
+          "name": "Propio: vendedor administra usuarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/usuarios",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 403\",()=>pm.response.to.have.status(403));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"No tiene permisos\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "B-02 - Gestión de acceso",
+      "item": [
+        {
+          "name": "Contraseña actual incorrecta",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/password",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"passwordActual\": \"ClaveEquivocada1\",\n  \"passwordNueva\": \"NuevaClave2026\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 409\",()=>pm.response.to.have.status(409));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"La contraseña actual no es correcta\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "B-03 - Gestión de acceso",
+      "item": [
+        {
+          "name": "Nueva igual a actual",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/password",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"passwordActual\": \"Vendedor2026*\",\n  \"passwordNueva\": \"Vendedor2026*\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 409\",()=>pm.response.to.have.status(409));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"La nueva contraseña debe ser distinta de la actual\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "B-04 - Gestión de acceso",
+      "item": [
+        {
+          "name": "Validación de nueva contraseña",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/password",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"passwordActual\": \"Vendedor2026*\",\n  \"passwordNueva\": \"abcdefgh\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 400\",()=>pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Validación de nueva contraseña",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/password",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"passwordActual\": \"Vendedor2026*\",\n  \"passwordNueva\": \"Clave1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 400\",()=>pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Validación de nueva contraseña",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/password",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"passwordActual\": \"Vendedor2026*\",\n  \"passwordNueva\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 400\",()=>pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "B-01 - Gestión de acceso",
+      "item": [
+        {
+          "name": "Cambio correcto de contraseña",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/password",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"passwordActual\": \"Vendedor2026*\",\n  \"passwordNueva\": \"NuevaClave2026\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 204\",()=>pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "La contraseña anterior falla",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"vendedor\",\n  \"password\": \"Vendedor2026*\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 401\",()=>pm.response.to.have.status(401));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"Usuario o contraseña incorrectos\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Nueva contraseña permite login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"vendedor\",\n  \"password\": \"NuevaClave2026\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));",
+                  "if(pm.response.code===200)pm.collectionVariables.set(\"tokenNuevo\",pm.response.json().token);",
+                  "pm.test(\"Roles y permisos presentes\",()=>{const d=pm.response.json();pm.expect(d.roles).to.be.an(\"array\").that.is.not.empty;pm.expect(d.permisos).to.be.an(\"array\").that.is.not.empty;});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Mismo token tras cambiar contraseña",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/auth/me",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "B-05 - Gestión de acceso",
+      "item": [
+        {
+          "name": "Admin asigna dos roles",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/usuarios/2/roles",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rolIds\": [\n    2,\n    3\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Mismo token obtiene permiso nuevo",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/categorias/32",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Vitaminas\",\n  \"descripcion\": \"Complementos vitamínicos\",\n  \"estado\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "B-06 - Gestión de acceso",
+      "item": [
+        {
+          "name": "No permite roles vacíos",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/usuarios/2/roles",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rolIds\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 400\",()=>pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Usuario inexistente",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/usuarios/999999/roles",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rolIds\": [\n    2\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 404\",()=>pm.response.to.have.status(404));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"Usuario no encontrado\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Rol inexistente",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/usuarios/2/roles",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rolIds\": [\n    999999\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 404\",()=>pm.response.to.have.status(404));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"roles no existen\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Admin conserva su propio rol",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/usuarios/1/roles",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rolIds\": [\n    2\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 409\",()=>pm.response.to.have.status(409));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"No puede quitarse\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "B-07 - Gestión de acceso",
+      "item": [
+        {
+          "name": "Admin desactiva vendedor",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/usuarios/2/estado",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Token previo de cuenta desactivada",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/auth/me",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 401\",()=>pm.response.to.have.status(401));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"El usuario está deshabilitado\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cuenta desactivada no inicia sesión",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"vendedor\",\n  \"password\": \"NuevaClave2026\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 401\",()=>pm.response.to.have.status(401));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"Usuario o contraseña incorrectos\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Admin reactiva vendedor",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/usuarios/2/estado",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Token funciona al reactivar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/auth/me",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "B-08 - Gestión de acceso",
+      "item": [
+        {
+          "name": "Vendedor no cambia estado",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/usuarios/2/estado",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 403\",()=>pm.response.to.have.status(403));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"No tiene permisos\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Vendedor no asigna roles",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/usuarios/2/roles",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rolIds\": [\n    2\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 403\",()=>pm.response.to.have.status(403));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"No tiene permisos\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Estado de usuario inexistente",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/usuarios/999999/estado",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 404\",()=>pm.response.to.have.status(404));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"Usuario no encontrado\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Admin no se desactiva",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/usuarios/1/estado",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 409\",()=>pm.response.to.have.status(409));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"No puede desactivarse\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "T-04 - Token",
+      "item": [
+        {
+          "name": "Token vencido tras un minuto real",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{alternateBaseUrl}}/auth/me",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVencido}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP esperado 401\",()=>pm.response.to.have.status(401));",
+                  "pm.test(\"Mensaje esperado\",()=>pm.expect(JSON.stringify(pm.response.json())).to.include(\"El token ha expirado\"));"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if(Date.now()<Number(pm.collectionVariables.get(\"tokenVenceEn\"))){throw new Error(\"Espere 61 segundos desde la emisión del token temporal\");}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "C-01 - CORS (confirmar además en navegador)",
+      "item": [
+        {
+          "name": "OPTIONS previo",
+          "request": {
+            "method": "OPTIONS",
+            "header": [
+              {
+                "key": "Origin",
+                "value": "http://localhost:4200"
+              },
+              {
+                "key": "Access-Control-Request-Method",
+                "value": "GET"
+              },
+              {
+                "key": "Access-Control-Request-Headers",
+                "value": "authorization"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/me",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Preflight 200\",()=>pm.response.to.have.status(200));",
+                  "pm.test(\"Origen permitido\",()=>pm.expect(pm.response.headers.get(\"Access-Control-Allow-Origin\")).to.eql(\"http://localhost:4200\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET desde el origen de la SPA",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Origin",
+                "value": "http://localhost:4200"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/me",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"GET 200\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Restaurar cuenta del vendedor",
+      "item": [
+        {
+          "name": "Restituir rol VENDEDOR",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/usuarios/2/roles",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenAdmin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rolIds\": [\n    2\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Roles restituidos\",()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Restituir contraseña de clase",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/password",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVendedor}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"passwordActual\": \"NuevaClave2026\",\n  \"passwordNueva\": \"Vendedor2026*\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Contraseña restituida\",()=>pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

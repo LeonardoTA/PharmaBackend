@@ -19,3 +19,13 @@ springdoc:
     path: /swagger-ui.html
   api-docs:
     enabled: true
+
+logging:
+  level:
+    pe.edu.upeu.PharmaBackend: DEBUG
+    org.hibernate.SQL: DEBUG
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiracion-minutos: ${JWT_EXPIRACION_MINUTOS:60}

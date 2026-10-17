@@ -1,0 +1,1995 @@
+{
+  "fecha": "2026-10-17T17:09:50.699Z",
+  "records": [
+    {
+      "id": "A-01",
+      "title": "Login admin",
+      "group": "Autenticación",
+      "who": "Público",
+      "method": "POST",
+      "path": "/auth/login",
+      "request": {
+        "username": "admin",
+        "password": "Admin2026*"
+      },
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "token": "[JWT local de prueba omitido]",
+        "tipo": "Bearer",
+        "expiraEnSegundos": 3600,
+        "username": "admin",
+        "nombreCompleto": "Rosa Elena Mendoza Ticona",
+        "roles": [
+          "ADMIN"
+        ],
+        "permisos": [
+          "CATALOGO_ESCRIBIR",
+          "CATALOGO_LEER",
+          "CLIENTES_ESCRIBIR",
+          "CLIENTES_LEER",
+          "REPORTES_VER",
+          "USUARIOS_ADMINISTRAR",
+          "VENTAS_LEER",
+          "VENTAS_REGISTRAR"
+        ]
+      },
+      "port": 8081,
+      "authorization": "Ausente",
+      "evidence": "A-01_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "A-01",
+      "title": "Login vendedor",
+      "group": "Autenticación",
+      "who": "Público",
+      "method": "POST",
+      "path": "/auth/login",
+      "request": {
+        "username": "vendedor",
+        "password": "Vendedor2026*"
+      },
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "token": "[JWT local de prueba omitido]",
+        "tipo": "Bearer",
+        "expiraEnSegundos": 3600,
+        "username": "vendedor",
+        "nombreCompleto": "Lucia Ramos Cutipa",
+        "roles": [
+          "VENDEDOR"
+        ],
+        "permisos": [
+          "CATALOGO_LEER",
+          "CLIENTES_ESCRIBIR",
+          "CLIENTES_LEER",
+          "VENTAS_LEER",
+          "VENTAS_REGISTRAR"
+        ]
+      },
+      "port": 8081,
+      "authorization": "Ausente",
+      "evidence": "A-01_02_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "A-01",
+      "title": "Login almacen",
+      "group": "Autenticación",
+      "who": "Público",
+      "method": "POST",
+      "path": "/auth/login",
+      "request": {
+        "username": "almacen",
+        "password": "Almacen2026*"
+      },
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "token": "[JWT local de prueba omitido]",
+        "tipo": "Bearer",
+        "expiraEnSegundos": 3600,
+        "username": "almacen",
+        "nombreCompleto": "Pedro Quispe Mamani",
+        "roles": [
+          "ALMACENERO"
+        ],
+        "permisos": [
+          "CATALOGO_ESCRIBIR",
+          "CATALOGO_LEER"
+        ]
+      },
+      "port": 8081,
+      "authorization": "Ausente",
+      "evidence": "A-01_03_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "A-01",
+      "title": "Login supervisor",
+      "group": "Autenticación",
+      "who": "Público",
+      "method": "POST",
+      "path": "/auth/login",
+      "request": {
+        "username": "supervisor",
+        "password": "Supervisor2026*"
+      },
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "token": "[JWT local de prueba omitido]",
+        "tipo": "Bearer",
+        "expiraEnSegundos": 3600,
+        "username": "supervisor",
+        "nombreCompleto": "Ana Torres Vilca",
+        "roles": [
+          "ALMACENERO",
+          "VENDEDOR"
+        ],
+        "permisos": [
+          "CATALOGO_ESCRIBIR",
+          "CATALOGO_LEER",
+          "CLIENTES_ESCRIBIR",
+          "CLIENTES_LEER",
+          "VENTAS_LEER",
+          "VENTAS_REGISTRAR"
+        ]
+      },
+      "port": 8081,
+      "authorization": "Ausente",
+      "evidence": "A-01_04_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "A-02",
+      "title": "Usuario inexistente",
+      "group": "Autenticación",
+      "who": "Público",
+      "method": "POST",
+      "path": "/auth/login",
+      "request": {
+        "username": "carmen",
+        "password": "Clave2026*"
+      },
+      "expectedStatus": 401,
+      "expectedMessage": "Usuario o contraseña incorrectos",
+      "status": 401,
+      "body": {
+        "error": "Unauthorized",
+        "message": "Usuario o contraseña incorrectos",
+        "path": "/api/v1/auth/login",
+        "status": 401,
+        "timestamp": "2026-10-17T12:02:16.6941448",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Ausente",
+      "evidence": "A-02_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "A-02",
+      "title": "Contraseña incorrecta",
+      "group": "Autenticación",
+      "who": "Público",
+      "method": "POST",
+      "path": "/auth/login",
+      "request": {
+        "username": "vendedor",
+        "password": "ClaveEquivocada1"
+      },
+      "expectedStatus": 401,
+      "expectedMessage": "Usuario o contraseña incorrectos",
+      "status": 401,
+      "body": {
+        "error": "Unauthorized",
+        "message": "Usuario o contraseña incorrectos",
+        "path": "/api/v1/auth/login",
+        "status": 401,
+        "timestamp": "2026-10-17T12:02:21.8645087",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Ausente",
+      "evidence": "A-02_02_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "A-03",
+      "title": "Cuenta inactiva",
+      "group": "Autenticación",
+      "who": "Público",
+      "method": "POST",
+      "path": "/auth/login",
+      "request": {
+        "username": "inactivo",
+        "password": "Inactivo2026*"
+      },
+      "expectedStatus": 401,
+      "expectedMessage": "Usuario o contraseña incorrectos",
+      "status": 401,
+      "body": {
+        "error": "Unauthorized",
+        "message": "Usuario o contraseña incorrectos",
+        "path": "/api/v1/auth/login",
+        "status": 401,
+        "timestamp": "2026-10-17T12:02:28.0304807",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Ausente",
+      "evidence": "A-03_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "A-04",
+      "title": "Usuario en mayúsculas",
+      "group": "Autenticación",
+      "who": "Público",
+      "method": "POST",
+      "path": "/auth/login",
+      "request": {
+        "username": "VENDEDOR",
+        "password": "Vendedor2026*"
+      },
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "token": "[JWT local de prueba omitido]",
+        "tipo": "Bearer",
+        "expiraEnSegundos": 3600,
+        "username": "vendedor",
+        "nombreCompleto": "Lucia Ramos Cutipa",
+        "roles": [
+          "VENDEDOR"
+        ],
+        "permisos": [
+          "CATALOGO_LEER",
+          "CLIENTES_ESCRIBIR",
+          "CLIENTES_LEER",
+          "VENTAS_LEER",
+          "VENTAS_REGISTRAR"
+        ]
+      },
+      "port": 8081,
+      "authorization": "Ausente",
+      "evidence": "A-04_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "T-01",
+      "title": "Token sin Bearer",
+      "group": "Token",
+      "who": "vendedor",
+      "method": "GET",
+      "path": "/auth/me",
+      "expectedStatus": 401,
+      "expectedMessage": "Debe iniciar sesión",
+      "status": 401,
+      "body": {
+        "timestamp": "2026-10-17T12:02:45.584595700",
+        "status": 401,
+        "error": "Unauthorized",
+        "message": "Debe iniciar sesión para acceder a este recurso",
+        "path": "/api/v1/auth/me",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Sin prefijo Bearer",
+      "evidence": "T-01_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "T-02",
+      "title": "Payload alterado",
+      "group": "Token",
+      "who": "vendedor",
+      "method": "GET",
+      "path": "/auth/me",
+      "expectedStatus": 401,
+      "expectedMessage": "El token no es válido",
+      "status": 401,
+      "body": {
+        "timestamp": "2026-10-17T12:02:51.762874100",
+        "status": 401,
+        "error": "Unauthorized",
+        "message": "El token no es válido",
+        "path": "/api/v1/auth/me",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "T-02_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "T-03",
+      "title": "Firma de otra clave",
+      "group": "Token",
+      "who": "vendedor",
+      "method": "GET",
+      "path": "/auth/me",
+      "expectedStatus": 401,
+      "expectedMessage": "El token no es válido",
+      "status": 401,
+      "body": {
+        "timestamp": "2026-10-17T12:02:56.175461300",
+        "status": 401,
+        "error": "Unauthorized",
+        "message": "El token no es válido",
+        "path": "/api/v1/auth/me",
+        "validationErrors": null
+      },
+      "port": 8082,
+      "authorization": "Bearer",
+      "evidence": "T-03_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "T-05",
+      "title": "Identidad y claims comprobados",
+      "group": "Token",
+      "who": "vendedor",
+      "method": "GET",
+      "path": "/auth/me",
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "id": 2,
+        "username": "vendedor",
+        "empleadoId": 2,
+        "empleadoNombre": "Lucia Ramos Cutipa",
+        "cargo": "Vendedora",
+        "roles": [
+          "VENDEDOR"
+        ],
+        "permisos": [
+          "CATALOGO_LEER",
+          "CLIENTES_ESCRIBIR",
+          "CLIENTES_LEER",
+          "VENTAS_LEER",
+          "VENTAS_REGISTRAR"
+        ],
+        "estado": true,
+        "fechaCreacion": "2026-10-17T16:57:52.705694"
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "T-05_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-01",
+      "title": "Vendedor POST categorías",
+      "group": "Permisos",
+      "who": "vendedor",
+      "method": "POST",
+      "path": "/categorias",
+      "request": {
+        "nombre": "Cuidado diario",
+        "descripcion": "Productos de cuidado personal",
+        "estado": true
+      },
+      "expectedStatus": 403,
+      "expectedMessage": "No tiene permisos",
+      "status": 403,
+      "body": {
+        "timestamp": "2026-10-17T12:03:07.791461",
+        "status": 403,
+        "error": "Forbidden",
+        "message": "No tiene permisos para realizar esta operación",
+        "path": "/api/v1/categorias",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-01_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-01",
+      "title": "Vendedor PUT categorías",
+      "group": "Permisos",
+      "who": "vendedor",
+      "method": "PUT",
+      "path": "/categorias/32",
+      "request": {
+        "nombre": "Cuidado diario",
+        "descripcion": "Productos de cuidado personal",
+        "estado": true
+      },
+      "expectedStatus": 403,
+      "expectedMessage": "No tiene permisos",
+      "status": 403,
+      "body": {
+        "timestamp": "2026-10-17T12:03:19.318561700",
+        "status": 403,
+        "error": "Forbidden",
+        "message": "No tiene permisos para realizar esta operación",
+        "path": "/api/v1/categorias/32",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-01_02_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-01",
+      "title": "Vendedor DELETE categorías",
+      "group": "Permisos",
+      "who": "vendedor",
+      "method": "DELETE",
+      "path": "/categorias/32",
+      "expectedStatus": 403,
+      "expectedMessage": "No tiene permisos",
+      "status": 403,
+      "body": {
+        "timestamp": "2026-10-17T12:03:30.836570500",
+        "status": 403,
+        "error": "Forbidden",
+        "message": "No tiene permisos para realizar esta operación",
+        "path": "/api/v1/categorias/32",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-01_03_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-02",
+      "title": "Almacén consulta clientes",
+      "group": "Permisos",
+      "who": "almacen",
+      "method": "GET",
+      "path": "/clientes",
+      "expectedStatus": 403,
+      "expectedMessage": "No tiene permisos",
+      "status": 403,
+      "body": {
+        "timestamp": "2026-10-17T12:03:41.306263300",
+        "status": 403,
+        "error": "Forbidden",
+        "message": "No tiene permisos para realizar esta operación",
+        "path": "/api/v1/clientes",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-02_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-02",
+      "title": "Almacén registra venta",
+      "group": "Permisos",
+      "who": "almacen",
+      "method": "POST",
+      "path": "/ventas",
+      "request": {
+        "clienteId": 10,
+        "detalles": [
+          {
+            "productoId": 17,
+            "cantidad": 1
+          }
+        ]
+      },
+      "expectedStatus": 403,
+      "expectedMessage": "No tiene permisos",
+      "status": 403,
+      "body": {
+        "timestamp": "2026-10-17T12:03:50.787012900",
+        "status": 403,
+        "error": "Forbidden",
+        "message": "No tiene permisos para realizar esta operación",
+        "path": "/api/v1/ventas",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-02_02_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-03",
+      "title": "Reporte restringido vendedor",
+      "group": "Permisos",
+      "who": "vendedor",
+      "method": "GET",
+      "path": "/reportes/productos-mas-vendidos",
+      "expectedStatus": 403,
+      "expectedMessage": "No tiene permisos",
+      "status": 403,
+      "body": {
+        "error": "Forbidden",
+        "message": "No tiene permisos para realizar esta operación",
+        "path": "/api/v1/reportes/productos-mas-vendidos",
+        "status": 403,
+        "timestamp": "2026-10-17T12:04:01.2863228",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-03_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-03",
+      "title": "Reporte restringido almacen",
+      "group": "Permisos",
+      "who": "almacen",
+      "method": "GET",
+      "path": "/reportes/productos-mas-vendidos",
+      "expectedStatus": 403,
+      "expectedMessage": "No tiene permisos",
+      "status": 403,
+      "body": {
+        "error": "Forbidden",
+        "message": "No tiene permisos para realizar esta operación",
+        "path": "/api/v1/reportes/productos-mas-vendidos",
+        "status": 403,
+        "timestamp": "2026-10-17T12:04:07.4556588",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-03_02_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-04",
+      "title": "Admin categorias",
+      "group": "Permisos",
+      "who": "admin",
+      "method": "GET",
+      "path": "/categorias/32",
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "id": 32,
+        "nombre": "Vitaminas",
+        "descripcion": "Complementos vitamínicos",
+        "estado": true,
+        "fechaCreacion": "2026-10-17T12:02:14.192426",
+        "fechaModificacion": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-04_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-04",
+      "title": "Admin productos",
+      "group": "Permisos",
+      "who": "admin",
+      "method": "GET",
+      "path": "/productos/17",
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "id": 17,
+        "nombre": "Vitamina C 500 mg",
+        "descripcion": "Tabletas de vitamina C",
+        "precio": 18.5,
+        "stock": 24,
+        "estado": true,
+        "categoriaId": 32,
+        "categoriaNombre": "Vitaminas",
+        "fechaCreacion": "2026-10-17T12:02:14.370009",
+        "fechaModificacion": "2026-10-17T12:02:14.6553542"
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-04_02_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-04",
+      "title": "Admin clientes",
+      "group": "Permisos",
+      "who": "admin",
+      "method": "GET",
+      "path": "/clientes/10",
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "id": 10,
+        "dni": "75318642",
+        "nombres": "Carlos Alberto",
+        "apellidos": "Soto Ramirez",
+        "email": "carlos.soto@example.com",
+        "telefono": "987654321",
+        "direccion": "Av. Lima 125",
+        "estado": true,
+        "fechaCreacion": "2026-10-17T12:02:14.5005623",
+        "fechaModificacion": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-04_03_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-04",
+      "title": "Admin ventas",
+      "group": "Permisos",
+      "who": "admin",
+      "method": "GET",
+      "path": "/ventas/16",
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "id": 16,
+        "fechaRegistro": "2026-10-17T12:02:14.617523",
+        "clienteId": 10,
+        "clienteNombre": "Carlos Alberto Soto Ramirez",
+        "estado": "REGISTRADA",
+        "total": 18.5,
+        "detalles": [
+          {
+            "productoId": 17,
+            "productoNombre": "Vitamina C 500 mg",
+            "cantidad": 1,
+            "precio": 18.5,
+            "subtotal": 18.5
+          }
+        ]
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-04_04_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-04",
+      "title": "Admin reportes",
+      "group": "Permisos",
+      "who": "admin",
+      "method": "GET",
+      "path": "/reportes/productos-mas-vendidos?desde=2026-10-17&hasta=2026-10-17",
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": [
+        {
+          "id": 17,
+          "nombre": "Vitamina C 500 mg",
+          "categoria": "Vitaminas",
+          "cantidad": 1,
+          "total": 18.5
+        }
+      ],
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-04_05_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-04",
+      "title": "Admin usuarios",
+      "group": "Permisos",
+      "who": "admin",
+      "method": "GET",
+      "path": "/usuarios",
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": [
+        {
+          "id": 1,
+          "username": "admin",
+          "empleadoId": 1,
+          "empleadoNombre": "Rosa Elena Mendoza Ticona",
+          "cargo": "Administradora",
+          "roles": [
+            "ADMIN"
+          ],
+          "permisos": [
+            "CATALOGO_ESCRIBIR",
+            "CATALOGO_LEER",
+            "CLIENTES_ESCRIBIR",
+            "CLIENTES_LEER",
+            "REPORTES_VER",
+            "USUARIOS_ADMINISTRAR",
+            "VENTAS_LEER",
+            "VENTAS_REGISTRAR"
+          ],
+          "estado": true,
+          "fechaCreacion": "2026-10-17T16:57:52.697778"
+        },
+        {
+          "id": 3,
+          "username": "almacen",
+          "empleadoId": 3,
+          "empleadoNombre": "Pedro Quispe Mamani",
+          "cargo": "Almacenero",
+          "roles": [
+            "ALMACENERO"
+          ],
+          "permisos": [
+            "CATALOGO_ESCRIBIR",
+            "CATALOGO_LEER"
+          ],
+          "estado": true,
+          "fechaCreacion": "2026-10-17T16:57:52.71207"
+        },
+        {
+          "id": 5,
+          "username": "inactivo",
+          "empleadoId": 5,
+          "empleadoNombre": "Jorge Apaza Huanca",
+          "cargo": "Vendedor",
+          "roles": [
+            "VENDEDOR"
+          ],
+          "permisos": [
+            "CATALOGO_LEER",
+            "CLIENTES_ESCRIBIR",
+            "CLIENTES_LEER",
+            "VENTAS_LEER",
+            "VENTAS_REGISTRAR"
+          ],
+          "estado": false,
+          "fechaCreacion": "2026-10-17T16:57:52.724752"
+        },
+        {
+          "id": 4,
+          "username": "supervisor",
+          "empleadoId": 4,
+          "empleadoNombre": "Ana Torres Vilca",
+          "cargo": "Jefa de tienda",
+          "roles": [
+            "ALMACENERO",
+            "VENDEDOR"
+          ],
+          "permisos": [
+            "CATALOGO_ESCRIBIR",
+            "CATALOGO_LEER",
+            "CLIENTES_ESCRIBIR",
+            "CLIENTES_LEER",
+            "VENTAS_LEER",
+            "VENTAS_REGISTRAR"
+          ],
+          "estado": true,
+          "fechaCreacion": "2026-10-17T16:57:52.71789"
+        },
+        {
+          "id": 2,
+          "username": "vendedor",
+          "empleadoId": 2,
+          "empleadoNombre": "Lucia Ramos Cutipa",
+          "cargo": "Vendedora",
+          "roles": [
+            "VENDEDOR"
+          ],
+          "permisos": [
+            "CATALOGO_LEER",
+            "CLIENTES_ESCRIBIR",
+            "CLIENTES_LEER",
+            "VENTAS_LEER",
+            "VENTAS_REGISTRAR"
+          ],
+          "estado": true,
+          "fechaCreacion": "2026-10-17T16:57:52.705694"
+        }
+      ],
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-04_06_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-04",
+      "title": "Admin empleados",
+      "group": "Permisos",
+      "who": "admin",
+      "method": "GET",
+      "path": "/empleados",
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": [
+        {
+          "id": 5,
+          "dni": "44556677",
+          "nombres": "Jorge",
+          "apellidos": "Apaza Huanca",
+          "cargo": "Vendedor",
+          "email": "japaza@pharmasoft.pe",
+          "telefono": null,
+          "estado": true,
+          "tieneUsuario": true
+        },
+        {
+          "id": 6,
+          "dni": "45667788",
+          "nombres": "Maria",
+          "apellidos": "Huaman Torres",
+          "cargo": "Cajera",
+          "email": "mhuaman@pharmasoft.pe",
+          "telefono": null,
+          "estado": true,
+          "tieneUsuario": false
+        },
+        {
+          "id": 1,
+          "dni": "40112233",
+          "nombres": "Rosa Elena",
+          "apellidos": "Mendoza Ticona",
+          "cargo": "Administradora",
+          "email": "rmendoza@pharmasoft.pe",
+          "telefono": "951000111",
+          "estado": true,
+          "tieneUsuario": true
+        },
+        {
+          "id": 3,
+          "dni": "42334455",
+          "nombres": "Pedro",
+          "apellidos": "Quispe Mamani",
+          "cargo": "Almacenero",
+          "email": "pquispe@pharmasoft.pe",
+          "telefono": null,
+          "estado": true,
+          "tieneUsuario": true
+        },
+        {
+          "id": 2,
+          "dni": "41223344",
+          "nombres": "Lucia",
+          "apellidos": "Ramos Cutipa",
+          "cargo": "Vendedora",
+          "email": "lramos@pharmasoft.pe",
+          "telefono": "951000222",
+          "estado": true,
+          "tieneUsuario": true
+        },
+        {
+          "id": 4,
+          "dni": "43445566",
+          "nombres": "Ana",
+          "apellidos": "Torres Vilca",
+          "cargo": "Jefa de tienda",
+          "email": "atorres@pharmasoft.pe",
+          "telefono": "951000444",
+          "estado": true,
+          "tieneUsuario": true
+        }
+      ],
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-04_07_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-04",
+      "title": "Admin roles",
+      "group": "Permisos",
+      "who": "admin",
+      "method": "GET",
+      "path": "/roles",
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": [
+        {
+          "id": 1,
+          "nombre": "ADMIN",
+          "descripcion": "Administra usuarios, ve reportes y opera todo el\r\nsistema",
+          "permisos": [
+            "CATALOGO_ESCRIBIR",
+            "CATALOGO_LEER",
+            "CLIENTES_ESCRIBIR",
+            "CLIENTES_LEER",
+            "REPORTES_VER",
+            "USUARIOS_ADMINISTRAR",
+            "VENTAS_LEER",
+            "VENTAS_REGISTRAR"
+          ]
+        },
+        {
+          "id": 3,
+          "nombre": "ALMACENERO",
+          "descripcion": "Mantiene categorias y productos",
+          "permisos": [
+            "CATALOGO_ESCRIBIR",
+            "CATALOGO_LEER"
+          ]
+        },
+        {
+          "id": 2,
+          "nombre": "VENDEDOR",
+          "descripcion": "Atiende clientes y registra ventas",
+          "permisos": [
+            "CATALOGO_LEER",
+            "CLIENTES_ESCRIBIR",
+            "CLIENTES_LEER",
+            "VENTAS_LEER",
+            "VENTAS_REGISTRAR"
+          ]
+        }
+      ],
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-04_08_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "U-01",
+      "title": "Contraseña sin número",
+      "group": "Usuarios",
+      "who": "admin",
+      "method": "POST",
+      "path": "/usuarios",
+      "request": {
+        "username": "maria",
+        "password": "abcdefgh",
+        "empleadoId": 6,
+        "rolIds": [
+          2
+        ]
+      },
+      "expectedStatus": 400,
+      "expectedMessage": "número",
+      "status": 400,
+      "body": {
+        "error": "Bad Request",
+        "message": "Existen errores de validación",
+        "path": "/api/v1/usuarios",
+        "status": 400,
+        "timestamp": "2026-10-17T12:05:50.1747381",
+        "validationErrors": {
+          "password": "La contraseña debe contener al menos una letra y un número"
+        }
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "U-01_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "U-01",
+      "title": "Roles vacíos al crear",
+      "group": "Usuarios",
+      "who": "admin",
+      "method": "POST",
+      "path": "/usuarios",
+      "request": {
+        "username": "maria",
+        "password": "Maria2026*",
+        "empleadoId": 6,
+        "rolIds": []
+      },
+      "expectedStatus": 400,
+      "expectedMessage": "Debe asignar",
+      "status": 400,
+      "body": {
+        "error": "Bad Request",
+        "message": "Existen errores de validación",
+        "path": "/api/v1/usuarios",
+        "status": 400,
+        "timestamp": "2026-10-17T12:05:58.3465423",
+        "validationErrors": {
+          "rolIds": "Debe asignar al menos un rol"
+        }
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "U-01_02_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "U-02",
+      "title": "Empleado con cuenta",
+      "group": "Usuarios",
+      "who": "admin",
+      "method": "POST",
+      "path": "/usuarios",
+      "request": {
+        "username": "maria",
+        "password": "Maria2026*",
+        "empleadoId": 2,
+        "rolIds": [
+          2
+        ]
+      },
+      "expectedStatus": 409,
+      "expectedMessage": "ya tiene un usuario",
+      "status": 409,
+      "body": {
+        "error": "Conflict",
+        "message": "El empleado Lucia Ramos Cutipa ya tiene un usuario",
+        "path": "/api/v1/usuarios",
+        "status": 409,
+        "timestamp": "2026-10-17T12:06:04.5370374",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "U-02_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "U-02",
+      "title": "Alta de María Huamán",
+      "group": "Usuarios",
+      "who": "admin",
+      "method": "POST",
+      "path": "/usuarios",
+      "request": {
+        "username": "maria",
+        "password": "Maria2026*",
+        "empleadoId": 6,
+        "rolIds": [
+          2
+        ]
+      },
+      "expectedStatus": 201,
+      "expectedMessage": "",
+      "status": 201,
+      "body": {
+        "id": 21,
+        "username": "maria",
+        "empleadoId": 6,
+        "empleadoNombre": "Maria Huaman Torres",
+        "cargo": "Cajera",
+        "roles": [
+          "VENDEDOR"
+        ],
+        "permisos": [
+          "CATALOGO_LEER",
+          "CLIENTES_ESCRIBIR",
+          "CLIENTES_LEER",
+          "VENTAS_LEER",
+          "VENTAS_REGISTRAR"
+        ],
+        "estado": true,
+        "fechaCreacion": "2026-10-17T12:06:10.8706596"
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "U-02_02_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "A-05",
+      "title": "Propio: login vacío",
+      "group": "Autenticación",
+      "who": "Público",
+      "method": "POST",
+      "path": "/auth/login",
+      "request": {
+        "username": "",
+        "password": ""
+      },
+      "expectedStatus": 400,
+      "expectedMessage": "obligatorio",
+      "status": 400,
+      "body": {
+        "error": "Bad Request",
+        "message": "Existen errores de validación",
+        "path": "/api/v1/auth/login",
+        "status": 400,
+        "timestamp": "2026-10-17T12:06:17.7951836",
+        "validationErrors": {
+          "username": "El usuario es obligatorio",
+          "password": "La contraseña es obligatoria"
+        }
+      },
+      "port": 8081,
+      "authorization": "Ausente",
+      "evidence": "A-05_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "T-06",
+      "title": "Propio: sin Authorization",
+      "group": "Token",
+      "who": "Anónimo",
+      "method": "GET",
+      "path": "/auth/me",
+      "expectedStatus": 401,
+      "expectedMessage": "Debe iniciar sesión",
+      "status": 401,
+      "body": {
+        "timestamp": "2026-10-17T12:06:25.256341200",
+        "status": 401,
+        "error": "Unauthorized",
+        "message": "Debe iniciar sesión para acceder a este recurso",
+        "path": "/api/v1/auth/me",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Ausente",
+      "evidence": "T-06_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-05",
+      "title": "Propio: unión de permisos supervisor",
+      "group": "Permisos",
+      "who": "supervisor",
+      "method": "GET",
+      "path": "/categorias/32",
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "id": 32,
+        "nombre": "Vitaminas",
+        "descripcion": "Complementos vitamínicos",
+        "estado": true,
+        "fechaCreacion": "2026-10-17T12:02:14.192426",
+        "fechaModificacion": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-05_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "P-05",
+      "title": "Propio: unión de permisos supervisor",
+      "group": "Permisos",
+      "who": "supervisor",
+      "method": "GET",
+      "path": "/clientes/10",
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "id": 10,
+        "dni": "75318642",
+        "nombres": "Carlos Alberto",
+        "apellidos": "Soto Ramirez",
+        "email": "carlos.soto@example.com",
+        "telefono": "987654321",
+        "direccion": "Av. Lima 125",
+        "estado": true,
+        "fechaCreacion": "2026-10-17T12:02:14.5005623",
+        "fechaModificacion": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "P-05_02_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "U-03",
+      "title": "Propio: vendedor administra usuarios",
+      "group": "Usuarios",
+      "who": "vendedor",
+      "method": "GET",
+      "path": "/usuarios",
+      "expectedStatus": 403,
+      "expectedMessage": "No tiene permisos",
+      "status": 403,
+      "body": {
+        "timestamp": "2026-10-17T12:06:49.654674200",
+        "status": 403,
+        "error": "Forbidden",
+        "message": "No tiene permisos para realizar esta operación",
+        "path": "/api/v1/usuarios",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "U-03_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-02",
+      "title": "Contraseña actual incorrecta",
+      "group": "Gestión de acceso",
+      "who": "vendedor",
+      "method": "PUT",
+      "path": "/auth/password",
+      "request": {
+        "passwordActual": "ClaveEquivocada1",
+        "passwordNueva": "NuevaClave2026"
+      },
+      "expectedStatus": 409,
+      "expectedMessage": "La contraseña actual no es correcta",
+      "status": 409,
+      "body": {
+        "error": "Conflict",
+        "message": "La contraseña actual no es correcta",
+        "path": "/api/v1/auth/password",
+        "status": 409,
+        "timestamp": "2026-10-17T12:06:59.1870319",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-02_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-03",
+      "title": "Nueva igual a actual",
+      "group": "Gestión de acceso",
+      "who": "vendedor",
+      "method": "PUT",
+      "path": "/auth/password",
+      "request": {
+        "passwordActual": "Vendedor2026*",
+        "passwordNueva": "Vendedor2026*"
+      },
+      "expectedStatus": 409,
+      "expectedMessage": "La nueva contraseña debe ser distinta de la actual",
+      "status": 409,
+      "body": {
+        "error": "Conflict",
+        "message": "La nueva contraseña debe ser distinta de la actual",
+        "path": "/api/v1/auth/password",
+        "status": 409,
+        "timestamp": "2026-10-17T12:07:07.4787581",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-03_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-04",
+      "title": "Validación de nueva contraseña",
+      "group": "Gestión de acceso",
+      "who": "vendedor",
+      "method": "PUT",
+      "path": "/auth/password",
+      "request": {
+        "passwordActual": "Vendedor2026*",
+        "passwordNueva": "abcdefgh"
+      },
+      "expectedStatus": 400,
+      "expectedMessage": "",
+      "status": 400,
+      "body": {
+        "error": "Bad Request",
+        "message": "Existen errores de validación",
+        "path": "/api/v1/auth/password",
+        "status": 400,
+        "timestamp": "2026-10-17T12:07:13.5073816",
+        "validationErrors": {
+          "passwordNueva": "La contraseña debe contener al menos una letra y un número"
+        }
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-04_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-04",
+      "title": "Validación de nueva contraseña",
+      "group": "Gestión de acceso",
+      "who": "vendedor",
+      "method": "PUT",
+      "path": "/auth/password",
+      "request": {
+        "passwordActual": "Vendedor2026*",
+        "passwordNueva": "Clave1"
+      },
+      "expectedStatus": 400,
+      "expectedMessage": "",
+      "status": 400,
+      "body": {
+        "error": "Bad Request",
+        "message": "Existen errores de validación",
+        "path": "/api/v1/auth/password",
+        "status": 400,
+        "timestamp": "2026-10-17T12:07:19.6863851",
+        "validationErrors": {
+          "passwordNueva": "La contraseña debe tener entre 8 y 72 caracteres"
+        }
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-04_02_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-04",
+      "title": "Validación de nueva contraseña",
+      "group": "Gestión de acceso",
+      "who": "vendedor",
+      "method": "PUT",
+      "path": "/auth/password",
+      "request": {
+        "passwordActual": "Vendedor2026*",
+        "passwordNueva": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1"
+      },
+      "expectedStatus": 400,
+      "expectedMessage": "",
+      "status": 400,
+      "body": {
+        "error": "Bad Request",
+        "message": "Existen errores de validación",
+        "path": "/api/v1/auth/password",
+        "status": 400,
+        "timestamp": "2026-10-17T12:07:25.8409984",
+        "validationErrors": {
+          "passwordNueva": "La contraseña debe tener entre 8 y 72 caracteres"
+        }
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-04_03_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-01",
+      "title": "Cambio correcto de contraseña",
+      "group": "Gestión de acceso",
+      "who": "vendedor",
+      "method": "PUT",
+      "path": "/auth/password",
+      "request": {
+        "passwordActual": "Vendedor2026*",
+        "passwordNueva": "NuevaClave2026"
+      },
+      "expectedStatus": 204,
+      "expectedMessage": "",
+      "status": 204,
+      "body": null,
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-01_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-01",
+      "title": "La contraseña anterior falla",
+      "group": "Gestión de acceso",
+      "who": "Público",
+      "method": "POST",
+      "path": "/auth/login",
+      "request": {
+        "username": "vendedor",
+        "password": "Vendedor2026*"
+      },
+      "expectedStatus": 401,
+      "expectedMessage": "Usuario o contraseña incorrectos",
+      "status": 401,
+      "body": {
+        "error": "Unauthorized",
+        "message": "Usuario o contraseña incorrectos",
+        "path": "/api/v1/auth/login",
+        "status": 401,
+        "timestamp": "2026-10-17T12:07:38.5603129",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Ausente",
+      "evidence": "B-01_02_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-01",
+      "title": "Nueva contraseña permite login",
+      "group": "Gestión de acceso",
+      "who": "Público",
+      "method": "POST",
+      "path": "/auth/login",
+      "request": {
+        "username": "vendedor",
+        "password": "NuevaClave2026"
+      },
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "token": "[JWT local de prueba omitido]",
+        "tipo": "Bearer",
+        "expiraEnSegundos": 3600,
+        "username": "vendedor",
+        "nombreCompleto": "Lucia Ramos Cutipa",
+        "roles": [
+          "VENDEDOR"
+        ],
+        "permisos": [
+          "CATALOGO_LEER",
+          "CLIENTES_ESCRIBIR",
+          "CLIENTES_LEER",
+          "VENTAS_LEER",
+          "VENTAS_REGISTRAR"
+        ]
+      },
+      "port": 8081,
+      "authorization": "Ausente",
+      "evidence": "B-01_03_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-01",
+      "title": "Mismo token tras cambiar contraseña",
+      "group": "Gestión de acceso",
+      "who": "vendedor",
+      "method": "GET",
+      "path": "/auth/me",
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "id": 2,
+        "username": "vendedor",
+        "empleadoId": 2,
+        "empleadoNombre": "Lucia Ramos Cutipa",
+        "cargo": "Vendedora",
+        "roles": [
+          "VENDEDOR"
+        ],
+        "permisos": [
+          "CATALOGO_LEER",
+          "CLIENTES_ESCRIBIR",
+          "CLIENTES_LEER",
+          "VENTAS_LEER",
+          "VENTAS_REGISTRAR"
+        ],
+        "estado": true,
+        "fechaCreacion": "2026-10-17T16:57:52.705694"
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-01_04_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-05",
+      "title": "Admin asigna dos roles",
+      "group": "Gestión de acceso",
+      "who": "admin",
+      "method": "PUT",
+      "path": "/usuarios/2/roles",
+      "request": {
+        "rolIds": [
+          2,
+          3
+        ]
+      },
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "id": 2,
+        "username": "vendedor",
+        "empleadoId": 2,
+        "empleadoNombre": "Lucia Ramos Cutipa",
+        "cargo": "Vendedora",
+        "roles": [
+          "ALMACENERO",
+          "VENDEDOR"
+        ],
+        "permisos": [
+          "CATALOGO_ESCRIBIR",
+          "CATALOGO_LEER",
+          "CLIENTES_ESCRIBIR",
+          "CLIENTES_LEER",
+          "VENTAS_LEER",
+          "VENTAS_REGISTRAR"
+        ],
+        "estado": true,
+        "fechaCreacion": "2026-10-17T16:57:52.705694"
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-05_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-05",
+      "title": "Mismo token obtiene permiso nuevo",
+      "group": "Gestión de acceso",
+      "who": "vendedor",
+      "method": "PUT",
+      "path": "/categorias/32",
+      "request": {
+        "nombre": "Vitaminas",
+        "descripcion": "Complementos vitamínicos",
+        "estado": true
+      },
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "id": 32,
+        "nombre": "Vitaminas",
+        "descripcion": "Complementos vitamínicos",
+        "estado": true,
+        "fechaCreacion": "2026-10-17T12:02:14.192426",
+        "fechaModificacion": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-05_02_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-06",
+      "title": "No permite roles vacíos",
+      "group": "Gestión de acceso",
+      "who": "admin",
+      "method": "PUT",
+      "path": "/usuarios/2/roles",
+      "request": {
+        "rolIds": []
+      },
+      "expectedStatus": 400,
+      "expectedMessage": "",
+      "status": 400,
+      "body": {
+        "error": "Bad Request",
+        "message": "Existen errores de validación",
+        "path": "/api/v1/usuarios/2/roles",
+        "status": 400,
+        "timestamp": "2026-10-17T12:08:17.6935342",
+        "validationErrors": {
+          "rolIds": "Debe asignar al menos un rol"
+        }
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-06_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-06",
+      "title": "Usuario inexistente",
+      "group": "Gestión de acceso",
+      "who": "admin",
+      "method": "PUT",
+      "path": "/usuarios/999999/roles",
+      "request": {
+        "rolIds": [
+          2
+        ]
+      },
+      "expectedStatus": 404,
+      "expectedMessage": "Usuario no encontrado",
+      "status": 404,
+      "body": {
+        "error": "Not Found",
+        "message": "Usuario no encontrado",
+        "path": "/api/v1/usuarios/999999/roles",
+        "status": 404,
+        "timestamp": "2026-10-17T12:08:23.8772114",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-06_02_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-06",
+      "title": "Rol inexistente",
+      "group": "Gestión de acceso",
+      "who": "admin",
+      "method": "PUT",
+      "path": "/usuarios/2/roles",
+      "request": {
+        "rolIds": [
+          999999
+        ]
+      },
+      "expectedStatus": 404,
+      "expectedMessage": "roles no existen",
+      "status": 404,
+      "body": {
+        "error": "Not Found",
+        "message": "Uno o más roles no existen",
+        "path": "/api/v1/usuarios/2/roles",
+        "status": 404,
+        "timestamp": "2026-10-17T12:08:30.0728848",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-06_03_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-06",
+      "title": "Admin conserva su propio rol",
+      "group": "Gestión de acceso",
+      "who": "admin",
+      "method": "PUT",
+      "path": "/usuarios/1/roles",
+      "request": {
+        "rolIds": [
+          2
+        ]
+      },
+      "expectedStatus": 409,
+      "expectedMessage": "No puede quitarse",
+      "status": 409,
+      "body": {
+        "error": "Conflict",
+        "message": "No puede quitarse a sí mismo el rol ADMIN",
+        "path": "/api/v1/usuarios/1/roles",
+        "status": 409,
+        "timestamp": "2026-10-17T12:08:36.2546259",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-06_04_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-07",
+      "title": "Admin desactiva vendedor",
+      "group": "Gestión de acceso",
+      "who": "admin",
+      "method": "PATCH",
+      "path": "/usuarios/2/estado",
+      "request": {
+        "estado": false
+      },
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "id": 2,
+        "username": "vendedor",
+        "empleadoId": 2,
+        "empleadoNombre": "Lucia Ramos Cutipa",
+        "cargo": "Vendedora",
+        "roles": [
+          "ALMACENERO",
+          "VENDEDOR"
+        ],
+        "permisos": [
+          "CATALOGO_ESCRIBIR",
+          "CATALOGO_LEER",
+          "CLIENTES_ESCRIBIR",
+          "CLIENTES_LEER",
+          "VENTAS_LEER",
+          "VENTAS_REGISTRAR"
+        ],
+        "estado": false,
+        "fechaCreacion": "2026-10-17T16:57:52.705694"
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-07_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-07",
+      "title": "Token previo de cuenta desactivada",
+      "group": "Gestión de acceso",
+      "who": "vendedor",
+      "method": "GET",
+      "path": "/auth/me",
+      "expectedStatus": 401,
+      "expectedMessage": "El usuario está deshabilitado",
+      "status": 401,
+      "body": {
+        "timestamp": "2026-10-17T12:08:54.162757600",
+        "status": 401,
+        "error": "Unauthorized",
+        "message": "El usuario está deshabilitado",
+        "path": "/api/v1/auth/me",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-07_02_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-07",
+      "title": "Cuenta desactivada no inicia sesión",
+      "group": "Gestión de acceso",
+      "who": "Público",
+      "method": "POST",
+      "path": "/auth/login",
+      "request": {
+        "username": "vendedor",
+        "password": "NuevaClave2026"
+      },
+      "expectedStatus": 401,
+      "expectedMessage": "Usuario o contraseña incorrectos",
+      "status": 401,
+      "body": {
+        "error": "Unauthorized",
+        "message": "Usuario o contraseña incorrectos",
+        "path": "/api/v1/auth/login",
+        "status": 401,
+        "timestamp": "2026-10-17T12:09:01.6636578",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Ausente",
+      "evidence": "B-07_03_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-07",
+      "title": "Admin reactiva vendedor",
+      "group": "Gestión de acceso",
+      "who": "admin",
+      "method": "PATCH",
+      "path": "/usuarios/2/estado",
+      "request": {
+        "estado": true
+      },
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "id": 2,
+        "username": "vendedor",
+        "empleadoId": 2,
+        "empleadoNombre": "Lucia Ramos Cutipa",
+        "cargo": "Vendedora",
+        "roles": [
+          "ALMACENERO",
+          "VENDEDOR"
+        ],
+        "permisos": [
+          "CATALOGO_ESCRIBIR",
+          "CATALOGO_LEER",
+          "CLIENTES_ESCRIBIR",
+          "CLIENTES_LEER",
+          "VENTAS_LEER",
+          "VENTAS_REGISTRAR"
+        ],
+        "estado": true,
+        "fechaCreacion": "2026-10-17T16:57:52.705694"
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-07_04_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-07",
+      "title": "Token funciona al reactivar",
+      "group": "Gestión de acceso",
+      "who": "vendedor",
+      "method": "GET",
+      "path": "/auth/me",
+      "expectedStatus": 200,
+      "expectedMessage": "",
+      "status": 200,
+      "body": {
+        "id": 2,
+        "username": "vendedor",
+        "empleadoId": 2,
+        "empleadoNombre": "Lucia Ramos Cutipa",
+        "cargo": "Vendedora",
+        "roles": [
+          "ALMACENERO",
+          "VENDEDOR"
+        ],
+        "permisos": [
+          "CATALOGO_ESCRIBIR",
+          "CATALOGO_LEER",
+          "CLIENTES_ESCRIBIR",
+          "CLIENTES_LEER",
+          "VENTAS_LEER",
+          "VENTAS_REGISTRAR"
+        ],
+        "estado": true,
+        "fechaCreacion": "2026-10-17T16:57:52.705694"
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-07_05_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-08",
+      "title": "Vendedor no cambia estado",
+      "group": "Gestión de acceso",
+      "who": "vendedor",
+      "method": "PATCH",
+      "path": "/usuarios/2/estado",
+      "request": {
+        "estado": false
+      },
+      "expectedStatus": 403,
+      "expectedMessage": "No tiene permisos",
+      "status": 403,
+      "body": {
+        "timestamp": "2026-10-17T12:09:22.889050900",
+        "status": 403,
+        "error": "Forbidden",
+        "message": "No tiene permisos para realizar esta operación",
+        "path": "/api/v1/usuarios/2/estado",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-08_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-08",
+      "title": "Vendedor no asigna roles",
+      "group": "Gestión de acceso",
+      "who": "vendedor",
+      "method": "PUT",
+      "path": "/usuarios/2/roles",
+      "request": {
+        "rolIds": [
+          2
+        ]
+      },
+      "expectedStatus": 403,
+      "expectedMessage": "No tiene permisos",
+      "status": 403,
+      "body": {
+        "timestamp": "2026-10-17T12:09:30.354775500",
+        "status": 403,
+        "error": "Forbidden",
+        "message": "No tiene permisos para realizar esta operación",
+        "path": "/api/v1/usuarios/2/roles",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-08_02_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-08",
+      "title": "Estado de usuario inexistente",
+      "group": "Gestión de acceso",
+      "who": "admin",
+      "method": "PATCH",
+      "path": "/usuarios/999999/estado",
+      "request": {
+        "estado": false
+      },
+      "expectedStatus": 404,
+      "expectedMessage": "Usuario no encontrado",
+      "status": 404,
+      "body": {
+        "error": "Not Found",
+        "message": "Usuario no encontrado",
+        "path": "/api/v1/usuarios/999999/estado",
+        "status": 404,
+        "timestamp": "2026-10-17T12:09:39.8056723",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-08_03_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "B-08",
+      "title": "Admin no se desactiva",
+      "group": "Gestión de acceso",
+      "who": "admin",
+      "method": "PATCH",
+      "path": "/usuarios/1/estado",
+      "request": {
+        "estado": false
+      },
+      "expectedStatus": 409,
+      "expectedMessage": "No puede desactivarse",
+      "status": 409,
+      "body": {
+        "error": "Conflict",
+        "message": "No puede desactivarse a sí mismo",
+        "path": "/api/v1/usuarios/1/estado",
+        "status": 409,
+        "timestamp": "2026-10-17T12:09:45.9663972",
+        "validationErrors": null
+      },
+      "port": 8081,
+      "authorization": "Bearer",
+      "evidence": "B-08_04_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "T-04",
+      "title": "Token vencido tras un minuto real",
+      "group": "Token",
+      "who": "vendedor",
+      "method": "GET",
+      "path": "/auth/me",
+      "expectedStatus": 401,
+      "expectedMessage": "El token ha expirado",
+      "status": 401,
+      "body": {
+        "timestamp": "2026-10-17T12:09:50.358863800",
+        "status": 401,
+        "error": "Unauthorized",
+        "message": "El token ha expirado. Inicie sesión nuevamente",
+        "path": "/api/v1/auth/me",
+        "validationErrors": null
+      },
+      "port": 8082,
+      "authorization": "Bearer",
+      "evidence": "T-04_01_swagger.png",
+      "pass": true
+    },
+    {
+      "id": "C-01",
+      "title": "Preflight desde SPA localhost:4200",
+      "group": "CORS",
+      "who": "vendedor",
+      "method": "OPTIONS + GET",
+      "path": "/auth/me",
+      "expectedStatus": 200,
+      "expectedMessage": "Preflight 200 y petición real 200 sin error CORS",
+      "status": 200,
+      "body": {
+        "id": 2,
+        "username": "vendedor",
+        "empleadoId": 2,
+        "empleadoNombre": "Lucia Ramos Cutipa",
+        "cargo": "Vendedora",
+        "roles": [
+          "VENDEDOR"
+        ],
+        "permisos": [
+          "CATALOGO_LEER",
+          "CLIENTES_ESCRIBIR",
+          "CLIENTES_LEER",
+          "VENTAS_LEER",
+          "VENTAS_REGISTRAR"
+        ],
+        "estado": true,
+        "fechaCreacion": "2026-10-17T16:57:52.705694"
+      },
+      "pass": true,
+      "authorization": "Bearer",
+      "evidence": "C-01_01_red.png",
+      "additionalEvidence": "C-01_02_preflight.png",
+      "extraScreens": [
+        "C-01_02_preflight.png",
+        "C-01_03_get_headers.png",
+        "C-01_04_get_body.png"
+      ],
+      "preflight": {
+        "status": 200,
+        "headers": {
+          "Access-Control-Allow-Credentials": "true",
+          "Access-Control-Allow-Headers": "authorization",
+          "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+          "Access-Control-Allow-Origin": "http://localhost:4200",
+          "Access-Control-Expose-Headers": "Location",
+          "Access-Control-Max-Age": "3600",
+          "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+          "Connection": "keep-alive",
+          "Content-Length": "0",
+          "Date": "Sat, 17 Oct 2026 17:15:22 GMT",
+          "Expires": "0",
+          "Keep-Alive": "timeout=60",
+          "Pragma": "no-cache",
+          "Vary": "Origin\nAccess-Control-Request-Method\nAccess-Control-Request-Headers",
+          "X-Content-Type-Options": "nosniff",
+          "X-Frame-Options": "DENY",
+          "X-XSS-Protection": "0"
+        }
+      },
+      "requestMethods": [
+        "GET",
+        "OPTIONS"
+      ]
+    }
+  ]
+}

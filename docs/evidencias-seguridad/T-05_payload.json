@@ -1,0 +1,13 @@
+{
+  "sub": "vendedor",
+  "authorities": [
+    "CATALOGO_LEER",
+    "CLIENTES_ESCRIBIR",
+    "CLIENTES_LEER",
+    "ROLE_VENDEDOR",
+    "VENTAS_LEER",
+    "VENTAS_REGISTRAR"
+  ],
+  "iat": 1792256517,
+  "exp": 1792260117
+}
