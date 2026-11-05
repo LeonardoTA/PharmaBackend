@@ -3,3 +3,24 @@ spring:
     name: PharmaBackend
   profiles:
     active: dev
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 500ms
+  cache:
+    type: redis
+    cache-names: categorias, productos
+    redis:
+      time-to-live: 10m
+      enable-statistics: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+      probes:
+        enabled: true

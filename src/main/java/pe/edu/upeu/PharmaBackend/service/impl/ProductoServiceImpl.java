@@ -2,6 +2,8 @@ package pe.edu.upeu.PharmaBackend.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pe.edu.upeu.PharmaBackend.dto.ProductoRequestDTO;
@@ -13,6 +15,8 @@ import pe.edu.upeu.PharmaBackend.exception.ReglaNegocioException;
 import pe.edu.upeu.PharmaBackend.repository.CategoriaRepository;
 import pe.edu.upeu.PharmaBackend.repository.ProductoRepository;
 import pe.edu.upeu.PharmaBackend.service.service.ProductoService;
+
+import java.util.List;
 
 @Service
 public class ProductoServiceImpl implements ProductoService {
@@ -28,6 +32,7 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     @Transactional
+    @CacheEvict(cacheNames = "productos", allEntries = true)
     public ProductoResponseDTO create(ProductoRequestDTO t) {
         String nombre = t.getNombre().trim();
         if (productoRepository.existsByNombreIgnoreCase(nombre)) {
@@ -57,6 +62,7 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     @Transactional
+    @CacheEvict(cacheNames = "productos", allEntries = true)
     public ProductoResponseDTO update(Long id, ProductoRequestDTO t) {
         Producto producto = productoRepository.findById(id).orElseThrow(() ->
                 new RecursoNoEncontradoException(
@@ -91,6 +97,7 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "productos", key = "'id-' + #id")
     public ProductoResponseDTO read(Long id) {
         Producto producto = productoRepository.findById(id).orElseThrow(() ->
                 new RecursoNoEncontradoException(
@@ -102,6 +109,7 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     @Transactional
+    @CacheEvict(cacheNames = "productos", allEntries = true)
     public void delete(Long id) {
         Producto producto = productoRepository.findById(id).orElseThrow(() ->
                 new RecursoNoEncontradoException(
@@ -113,7 +121,8 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     @Transactional(readOnly = true)
-    public Iterable<ProductoResponseDTO> readAll() {
+    @Cacheable(cacheNames = "productos", key = "'todas'")
+    public List<ProductoResponseDTO> readAll() {
         return productoRepository.findAll()
                 .stream()
                 .map(this::convertirResponse)
