@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
 spring:
   datasource:
     url: jdbc:oracle:thin:@//localhost:1522/FREEPDB1
@@ -10,7 +10,6 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
     properties:
       hibernate:
         format_sql: true
@@ -24,8 +23,10 @@ logging:
   level:
     pe.edu.upeu.PharmaBackend: DEBUG
     org.hibernate.SQL: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %-5level [%X{requestId}] %logger{36} - %msg%n"
 
 app:
   jwt:
-    secret: ${JWT_SECRET}
+    secret: ${JWT_SECRET:dGhpcy1pcy1hLXNlY3VyZS1qd3Qtc2VjcmV0LWtleS1mb3ItZGV2ZWxvcG1lbnQtcHVycG9zZXMtb25seS0yNTZiaXRz}
     expiracion-minutos: ${JWT_EXPIRACION_MINUTOS:60}
