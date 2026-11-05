@@ -46,6 +46,8 @@ public class SecurityConfig {
     private static final String[] RUTAS_PUBLICAS = {
             "/api/v1/auth/login",
             "/api/health",
+            "/actuator/health",
+            "/actuator/health/**",
             "/swagger-ui.html",
             "/swagger-ui/**",
             "/v3/api-docs/**",
@@ -82,7 +84,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/v1/clientes/**")
                         .hasAuthority(CLIENTES_LEER.name())
                         .requestMatchers("/api/v1/clientes/**")
-.hasAuthority(CLIENTES_ESCRIBIR.name())
+                        .hasAuthority(CLIENTES_ESCRIBIR.name())
                         // Ventas
                         .requestMatchers(HttpMethod.POST, "/api/v1/ventas")
                         .hasAuthority(VENTAS_REGISTRAR.name())
@@ -93,6 +95,9 @@ public class SecurityConfig {
                         // Administracion de la seguridad
                         .requestMatchers("/api/v1/usuarios/**",
                                 "/api/v1/empleados/**", "/api/v1/roles/**")
+                        .hasAuthority(USUARIOS_ADMINISTRAR.name())
+                        // Monitoreo: Actuator protegido exige USUARIOS_ADMINISTRAR
+                        .requestMatchers("/actuator/**")
                         .hasAuthority(USUARIOS_ADMINISTRAR.name())
                         // Todo lo demas (auth/me, reportes...) exige un usuario
                         // autenticado; los reportes ademas usan @PreAuthorize.
