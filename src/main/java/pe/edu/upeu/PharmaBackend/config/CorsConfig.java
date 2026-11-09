@@ -1,11 +1,14 @@
 package pe.edu.upeu.PharmaBackend.config;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 import java.util.List;
+
 /*
  * Configuracion CORS para /api/**.
  *
@@ -16,15 +19,18 @@ import java.util.List;
 @Configuration
 public class CorsConfig {
     private final List<String> origenesPermitidos;
-public CorsConfig(
+
+    public CorsConfig(
             @Value("${app.cors.allowed-origins:"
                     + "http://localhost:5173,"
                     + "http://127.0.0.1:5173,"
                     + "http://localhost:4200,"
+                    + "http://localhost:8081,"
                     + "http://localhost:3000}")
             String[] origenesPermitidos) {
         this.origenesPermitidos = List.of(origenesPermitidos);
     }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
@@ -32,7 +38,7 @@ public CorsConfig(
         config.setAllowedMethods(List.of(
                 "GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of(
-                "Content-Type", "Accept", "Authorization", "Origin"));
+                "Content-Type", "Accept", "Authorization", "Origin", "X-Request-Id"));
         config.setExposedHeaders(List.of("Location", "X-Request-Id"));
         config.setAllowCredentials(true);
         config.setMaxAge(3600L);

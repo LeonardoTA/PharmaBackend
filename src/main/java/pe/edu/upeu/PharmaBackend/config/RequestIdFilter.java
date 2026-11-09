@@ -27,7 +27,10 @@ public class RequestIdFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain chain)
             throws ServletException, IOException {
-        String id = UUID.randomUUID().toString().substring(0, 8);
+        String id = request.getHeader(CABECERA);
+        if (id == null || id.isBlank()) {
+            id = UUID.randomUUID().toString().substring(0, 8);
+        }
         MDC.put(CLAVE_MDC, id);
         response.setHeader(CABECERA, id);
         long inicio = System.currentTimeMillis();
