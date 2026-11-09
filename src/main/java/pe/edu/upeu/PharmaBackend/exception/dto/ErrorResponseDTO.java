@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Map;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -18,6 +19,7 @@ public class ErrorResponseDTO {
     private String message;
     private String path;
     private Map<String, String> validationErrors;
+    private String requestId;
 
     public ErrorResponseDTO(LocalDateTime timestamp, int status, String error, String message, String path) {
         this.timestamp = timestamp;
@@ -25,5 +27,14 @@ public class ErrorResponseDTO {
         this.error = error;
         this.message = message;
         this.path = path;
+    }
+
+    public ErrorResponseDTO(LocalDateTime timestamp, int status, String error, String message, String path, Map<String, String> validationErrors) {
+        this.timestamp = timestamp;
+        this.status = status;
+        this.error = error;
+        this.message = message;
+        this.path = path;
+        this.validationErrors = validationErrors;
     }
 }

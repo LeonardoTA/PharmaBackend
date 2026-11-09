@@ -1,6 +1,7 @@
 package pe.edu.upeu.PharmaBackend.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.MDC;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import pe.edu.upeu.PharmaBackend.config.RequestIdFilter;
 import pe.edu.upeu.PharmaBackend.exception.dto.ErrorResponseDTO;
 
 import java.time.LocalDateTime;
@@ -17,21 +19,24 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    private String getRequestId() {
+        return MDC.get(RequestIdFilter.CLAVE_MDC);
+    }
+
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<ErrorResponseDTO> handleAuthentication(AuthenticationException ex, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponseDTO(
-                LocalDateTime.now(), 401, "Unauthorized", "Usuario o contraseña incorrectos", request.getRequestURI(), null));
+                LocalDateTime.now(), 401, "Unauthorized", "Usuario o contraseña incorrectos", request.getRequestURI(), null, getRequestId()));
     }
+
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ErrorResponseDTO> handleAccessDenied(AccessDeniedException ex, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorResponseDTO(
-                LocalDateTime.now(), 403, "Forbidden", "No tiene permisos para realizar esta operación", request.getRequestURI(), null));
+                LocalDateTime.now(), 403, "Forbidden", "No tiene permisos para realizar esta operación", request.getRequestURI(), null, getRequestId()));
     }
 
-
-//Recurso no encontrado
-//HTTP 404
-
+    // Recurso no encontrado (HTTP 404)
     @ExceptionHandler(RecursoNoEncontradoException.class)
     public ResponseEntity<ErrorResponseDTO> handleNotFound(
             RecursoNoEncontradoException ex,
@@ -43,7 +48,8 @@ public class GlobalExceptionHandler {
                 "Not Found",
                 ex.getMessage(),
                 request.getRequestURI(),
-                null
+                null,
+                getRequestId()
         );
 
         return ResponseEntity
@@ -51,9 +57,7 @@ public class GlobalExceptionHandler {
                 .body(error);
     }
 
-// Regla de negocio
-// HTTP 409
-
+    // Regla de negocio (HTTP 409)
     @ExceptionHandler(ReglaNegocioException.class)
     public ResponseEntity<ErrorResponseDTO> handleBusinessRule(
             ReglaNegocioException ex,
@@ -65,7 +69,8 @@ public class GlobalExceptionHandler {
                 "Conflict",
                 ex.getMessage(),
                 request.getRequestURI(),
-                null
+                null,
+                getRequestId()
         );
 
         return ResponseEntity
@@ -73,17 +78,13 @@ public class GlobalExceptionHandler {
                 .body(error);
     }
 
-
-//Errores de @Valid
-//HTTP 400
-
+    // Errores de @Valid (HTTP 400)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponseDTO> handleValidation(
             MethodArgumentNotValidException ex,
             HttpServletRequest request) {
 
-        Map<String, String> validationErrors =
-                new LinkedHashMap<>();
+        Map<String, String> validationErrors = new LinkedHashMap<>();
 
         ex.getBindingResult()
                 .getFieldErrors()
@@ -100,7 +101,8 @@ public class GlobalExceptionHandler {
                 "Bad Request",
                 "Existen errores de validación",
                 request.getRequestURI(),
-                validationErrors
+                validationErrors,
+                getRequestId()
         );
 
         return ResponseEntity
@@ -108,8 +110,7 @@ public class GlobalExceptionHandler {
                 .body(error);
     }
 
-    // Violación de integridad referencial (p. ej. eliminar con datos asociados)
-    // HTTP 409
+    // Violación de integridad referencial (HTTP 409)
     @ExceptionHandler(org.springframework.dao.DataIntegrityViolationException.class)
     public ResponseEntity<ErrorResponseDTO> handleDataIntegrity(
             org.springframework.dao.DataIntegrityViolationException ex,
@@ -121,11 +122,33 @@ public class GlobalExceptionHandler {
                 "Conflict",
                 "No se puede eliminar la categoría porque tiene productos asociados.",
                 request.getRequestURI(),
-                null
+                null,
+                getRequestId()
         );
 
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
+                .body(error);
+    }
+
+    // Error interno inesperado (HTTP 500)
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponseDTO> handleGenericException(
+            Exception ex,
+            HttpServletRequest request) {
+
+        ErrorResponseDTO error = new ErrorResponseDTO(
+                LocalDateTime.now(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "Internal Server Error",
+                "Ocurrió un error inesperado en el servidor",
+                request.getRequestURI(),
+                null,
+                getRequestId()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(error);
     }
 }
