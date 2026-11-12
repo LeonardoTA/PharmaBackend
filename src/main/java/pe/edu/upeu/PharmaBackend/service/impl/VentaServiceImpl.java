@@ -1,8 +1,9 @@
 package pe.edu.upeu.PharmaBackend.service.impl;
 
+import pe.edu.upeu.PharmaBackend.dto.PaginaResponseDTO;
+import pe.edu.upeu.PharmaBackend.util.PaginacionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +27,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
@@ -121,13 +121,13 @@ public class VentaServiceImpl implements VentaService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<VentaResponseDTO> buscarVentas(
+    public PaginaResponseDTO<VentaResponseDTO> buscarVentas(
             Long clienteId,
             EstadoVenta estado,
             LocalDate desde,
             LocalDate hasta,
             String ordenarPor,
-            String direccion) {
+            String direccion, int pagina, int tamanio) {
 
         long inicio = System.currentTimeMillis();
         log.info("Inicio buscar ventas | clienteId={} | estado={} | desde={} | hasta={} | ordenarPor={} | direccion={}", clienteId, estado, desde, hasta, ordenarPor, direccion);
@@ -139,45 +139,18 @@ public class VentaServiceImpl implements VentaService {
             );
         }
 
-        Sort sort = construirSort(ordenarPor, direccion);
+        var pageable = PaginacionUtil.construir(
+                pagina, tamanio, ordenarPor, direccion, CAMPOS_ORDENABLES, ORDEN_POR_DEFECTO);
         LocalDateTime desdeHora = desde == null ? null : desde.atStartOfDay();
-        LocalDateTime hastaHora = hasta == null ? null : hasta.atTime(LocalTime.MAX);
+        LocalDateTime hastaHora = hasta == null ? null : hasta.plusDays(1).atStartOfDay();
 
-        List<VentaResponseDTO> resultado = ventaRepository
-                .buscar(clienteId, estado, desdeHora, hastaHora, sort)
-                .stream()
-                .map(this::convertirResponse)
-                .toList();
+        var resultado = PaginaResponseDTO.de(ventaRepository
+                .buscar(clienteId, estado, desdeHora, hastaHora, pageable)
+                .map(this::convertirResponse));
 
-        log.info("Fin buscar ventas | clienteId={} | estado={} | desde={} | hasta={} | ordenarPor={} | direccion={} | filas={} | duracionMs={}", clienteId, estado, desde, hasta, ordenarPor, direccion, resultado.size(), System.currentTimeMillis() - inicio);
+        log.info("Fin buscar ventas | clienteId={} | estado={} | desde={} | hasta={} | ordenarPor={} | direccion={} | filas={} | duracionMs={}", clienteId, estado, desde, hasta, ordenarPor, direccion, resultado.contenido().size(), System.currentTimeMillis() - inicio);
 
         return resultado;
-    }
-
-    private Sort construirSort(String ordenarPor, String direccion) {
-        String campo = (ordenarPor == null || ordenarPor.isBlank())
-                ? ORDEN_POR_DEFECTO
-                : ordenarPor.trim();
-
-        if (!CAMPOS_ORDENABLES.contains(campo)) {
-            throw new ReglaNegocioException(
-                    "El campo de ordenamiento '" + campo
-                            + "' no está permitido. Campos válidos: " + CAMPOS_ORDENABLES
-            );
-        }
-
-        String sentido = (direccion == null || direccion.isBlank()) ? "desc" : direccion.trim();
-
-        if (!sentido.equalsIgnoreCase("asc") && !sentido.equalsIgnoreCase("desc")) {
-            throw new ReglaNegocioException(
-                    "La dirección de ordenamiento '" + sentido
-                            + "' no está permitida. Valores válidos: asc, desc"
-            );
-        }
-
-        return sentido.equalsIgnoreCase("asc")
-                ? Sort.by(campo).ascending()
-                : Sort.by(campo).descending();
     }
 
     private VentaResponseDTO convertirResponse(Venta venta) {
