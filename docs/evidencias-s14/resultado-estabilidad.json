@@ -1,0 +1,226 @@
+{
+  "fecha": "2026-11-12",
+  "comando": "npx playwright test --repeat-each=3",
+  "pruebasDistintas": 7,
+  "ejecuciones": 21,
+  "aprobadas": 21,
+  "fallidas": 0,
+  "omitidas": 0,
+  "inestables": 0,
+  "reintentos": 0,
+  "erroresJavascript": 0,
+  "respuestas5xx": 0,
+  "duracionMs": 58356.644,
+  "resultados": [
+    {
+      "prueba": "una ruta protegida sin sesión lleva al login con returnUrl",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-12T18:32:55.471Z",
+      "duracionMs": 1961,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "credenciales incorrectas muestran el mensaje del backend",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-12T18:32:57.807Z",
+      "duracionMs": 2106,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "tras iniciar sesión vuelve a la página pedida",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-12T18:32:59.949Z",
+      "duracionMs": 1665,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "una ruta protegida sin sesión lleva al login con returnUrl",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-12T18:33:15.990Z",
+      "duracionMs": 1778,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "credenciales incorrectas muestran el mensaje del backend",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-12T18:33:18.087Z",
+      "duracionMs": 1803,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "tras iniciar sesión vuelve a la página pedida",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-12T18:33:19.923Z",
+      "duracionMs": 1679,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "una ruta protegida sin sesión lleva al login con returnUrl",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-12T18:33:34.815Z",
+      "duracionMs": 1599,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "credenciales incorrectas muestran el mensaje del backend",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-12T18:33:36.684Z",
+      "duracionMs": 1788,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "tras iniciar sesión vuelve a la página pedida",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-12T18:33:38.504Z",
+      "duracionMs": 1622,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "flujo principal: el vendedor registra una venta y el stock baja",
+      "archivo": "flujo-venta.spec.ts",
+      "inicio": "2026-11-12T18:33:01.651Z",
+      "duracionMs": 5937,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "flujo principal: el vendedor registra una venta y el stock baja",
+      "archivo": "flujo-venta.spec.ts",
+      "inicio": "2026-11-12T18:33:21.644Z",
+      "duracionMs": 5644,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "flujo principal: el vendedor registra una venta y el stock baja",
+      "archivo": "flujo-venta.spec.ts",
+      "inicio": "2026-11-12T18:33:40.179Z",
+      "duracionMs": 5850,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "productos se paginan en el servidor con la página en la URL",
+      "archivo": "paginacion.spec.ts",
+      "inicio": "2026-11-12T18:33:07.620Z",
+      "duracionMs": 2760,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "productos se paginan en el servidor con la página en la URL",
+      "archivo": "paginacion.spec.ts",
+      "inicio": "2026-11-12T18:33:27.322Z",
+      "duracionMs": 2398,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "productos se paginan en el servidor con la página en la URL",
+      "archivo": "paginacion.spec.ts",
+      "inicio": "2026-11-12T18:33:46.072Z",
+      "duracionMs": 2486,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "el almacenero no ve Ventas y la URL directa es denegada",
+      "archivo": "permisos.spec.ts",
+      "inicio": "2026-11-12T18:33:10.420Z",
+      "duracionMs": 2326,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "el vendedor ve Productos sin botones de edición",
+      "archivo": "permisos.spec.ts",
+      "inicio": "2026-11-12T18:33:12.781Z",
+      "duracionMs": 1865,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "el almacenero no ve Ventas y la URL directa es denegada",
+      "archivo": "permisos.spec.ts",
+      "inicio": "2026-11-12T18:33:29.753Z",
+      "duracionMs": 2190,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "el vendedor ve Productos sin botones de edición",
+      "archivo": "permisos.spec.ts",
+      "inicio": "2026-11-12T18:33:31.971Z",
+      "duracionMs": 1664,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "el almacenero no ve Ventas y la URL directa es denegada",
+      "archivo": "permisos.spec.ts",
+      "inicio": "2026-11-12T18:33:48.595Z",
+      "duracionMs": 2260,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "el vendedor ve Productos sin botones de edición",
+      "archivo": "permisos.spec.ts",
+      "inicio": "2026-11-12T18:33:50.884Z",
+      "duracionMs": 1597,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    }
+  ]
+}

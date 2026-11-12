@@ -1,0 +1,26 @@
+
+Running 21 tests using 1 worker
+
+  ok  1 [chromium] › e2e\autenticacion.spec.ts:5:7 › Autenticación › una ruta protegida sin sesión lleva al login con returnUrl (2.0s)
+  ok  2 [chromium] › e2e\autenticacion.spec.ts:11:7 › Autenticación › credenciales incorrectas muestran el mensaje del backend (2.1s)
+  ok  3 [chromium] › e2e\autenticacion.spec.ts:22:7 › Autenticación › tras iniciar sesión vuelve a la página pedida (1.7s)
+  ok  4 [chromium] › e2e\flujo-venta.spec.ts:4:5 › flujo principal: el vendedor registra una venta y el stock baja (5.9s)
+  ok  5 [chromium] › e2e\paginacion.spec.ts:4:5 › productos se paginan en el servidor con la página en la URL (2.8s)
+  ok  6 [chromium] › e2e\permisos.spec.ts:4:5 › el almacenero no ve Ventas y la URL directa es denegada (2.3s)
+  ok  7 [chromium] › e2e\permisos.spec.ts:14:5 › el vendedor ve Productos sin botones de edición (1.9s)
+  ok  8 [chromium] › e2e\autenticacion.spec.ts:5:7 › Autenticación › una ruta protegida sin sesión lleva al login con returnUrl (1.8s)
+  ok  9 [chromium] › e2e\autenticacion.spec.ts:11:7 › Autenticación › credenciales incorrectas muestran el mensaje del backend (1.8s)
+  ok 10 [chromium] › e2e\autenticacion.spec.ts:22:7 › Autenticación › tras iniciar sesión vuelve a la página pedida (1.7s)
+  ok 11 [chromium] › e2e\flujo-venta.spec.ts:4:5 › flujo principal: el vendedor registra una venta y el stock baja (5.6s)
+  ok 12 [chromium] › e2e\paginacion.spec.ts:4:5 › productos se paginan en el servidor con la página en la URL (2.4s)
+  ok 13 [chromium] › e2e\permisos.spec.ts:4:5 › el almacenero no ve Ventas y la URL directa es denegada (2.2s)
+  ok 14 [chromium] › e2e\permisos.spec.ts:14:5 › el vendedor ve Productos sin botones de edición (1.7s)
+  ok 15 [chromium] › e2e\autenticacion.spec.ts:5:7 › Autenticación › una ruta protegida sin sesión lleva al login con returnUrl (1.6s)
+  ok 16 [chromium] › e2e\autenticacion.spec.ts:11:7 › Autenticación › credenciales incorrectas muestran el mensaje del backend (1.8s)
+  ok 17 [chromium] › e2e\autenticacion.spec.ts:22:7 › Autenticación › tras iniciar sesión vuelve a la página pedida (1.6s)
+  ok 18 [chromium] › e2e\flujo-venta.spec.ts:4:5 › flujo principal: el vendedor registra una venta y el stock baja (5.8s)
+  ok 19 [chromium] › e2e\paginacion.spec.ts:4:5 › productos se paginan en el servidor con la página en la URL (2.5s)
+  ok 20 [chromium] › e2e\permisos.spec.ts:4:5 › el almacenero no ve Ventas y la URL directa es denegada (2.3s)
+  ok 21 [chromium] › e2e\permisos.spec.ts:14:5 › el vendedor ve Productos sin botones de edición (1.6s)
+
+  21 passed (58.4s)

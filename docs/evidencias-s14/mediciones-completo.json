@@ -1,0 +1,91 @@
+[
+  {
+    "caso": "productos20",
+    "ruta": "/productos?pagina=0&tamanio=20",
+    "status": 200,
+    "ms": 16.15,
+    "bytes": 5965,
+    "filas": 20,
+    "pagina": 0,
+    "tamanio": 20,
+    "totalElementos": 5020,
+    "totalPaginas": 251,
+    "ultima": false
+  },
+  {
+    "caso": "productos100",
+    "ruta": "/productos?pagina=0&tamanio=100",
+    "status": 200,
+    "ms": 38.34,
+    "bytes": 28199,
+    "filas": 100,
+    "pagina": 0,
+    "tamanio": 100,
+    "totalElementos": 5020,
+    "totalPaginas": 51,
+    "ultima": false
+  },
+  {
+    "caso": "productos249",
+    "ruta": "/productos?pagina=249&tamanio=20",
+    "status": 200,
+    "ms": 31.91,
+    "bytes": 5661,
+    "filas": 20,
+    "pagina": 249,
+    "tamanio": 20,
+    "totalElementos": 5020,
+    "totalPaginas": 251,
+    "ultima": false
+  },
+  {
+    "caso": "productosUltima",
+    "ruta": "/productos?pagina=250&tamanio=20",
+    "status": 200,
+    "ms": 30.01,
+    "bytes": 6075,
+    "filas": 20,
+    "pagina": 250,
+    "tamanio": 20,
+    "totalElementos": 5020,
+    "totalPaginas": 251,
+    "ultima": true
+  },
+  {
+    "caso": "limite",
+    "ruta": "/productos?pagina=0&tamanio=500",
+    "status": 409,
+    "ms": 13.7,
+    "bytes": 207,
+    "mensaje": "El tamaño de página debe estar entre 1 y 100."
+  },
+  {
+    "caso": "campo",
+    "ruta": "/productos?ordenarPor=noPermitido",
+    "status": 409,
+    "ms": 12.7,
+    "bytes": 206,
+    "mensaje": "El campo de ordenamiento no está permitido."
+  },
+  {
+    "caso": "paginaNegativa",
+    "ruta": "/productos?pagina=-1",
+    "status": 409,
+    "ms": 17.93,
+    "bytes": 201,
+    "mensaje": "La página debe ser mayor o igual a cero."
+  },
+  {
+    "caso": "ventas",
+    "ruta": "/ventas/buscar?desde=2026-11-01&hasta=2026-11-12&pagina=0&tamanio=20",
+    "status": 200,
+    "ms": 75.63,
+    "bytes": 4304,
+    "filas": 20,
+    "pagina": 0,
+    "tamanio": 20,
+    "totalElementos": 16572,
+    "totalPaginas": 829,
+    "ultima": false
+  }
+]

@@ -1,48 +1,55 @@
-# Práctica S14: pasos 1 a 4
+# Práctica S14: integración y estabilización completa
 
-Estudiante: James Christopher Tequen Oncoy. Curso: Lenguaje de Programación 2.
+Estudiante: James Christopher Tequen Oncoy. Asignatura: Lenguaje de Programación 2.
 Docente: Benjamin David Reyna Barreto. Fecha: 12 de noviembre de 2026.
 
-## Alcance autorizado
+## Entrega
 
-Ramas de trabajo, carga de volumen y mediciones, paginador reutilizable, Productos y Ventas con paginación del servidor y estado en la URL. Corresponde a los criterios 1 a 5 de la lista de cotejo. Los pasos 5 a 11, la auditoría, la matriz de ocho integraciones y las siete pruebas E2E repetidas tres veces quedan fuera de esta entrega parcial.
+- Código de los once pasos en la rama feature/integracion-estabilizacion-Tequen de ambos repositorios, con más de tres commits y PR hacia develop.
+- Un único PDF, `docs/Tequen_LP2_S14_Practica.pdf`, con tabla de evidencias, matriz de integración, informe de Playwright, incidencias y lista de cotejo.
+- `e2e/`: los siete casos de la guía, configuración con un worker y cero reintentos.
+- `docs/incidencias.md`: cinco incidencias reales cerradas con causa, corrección y commit.
+- `docs/matriz-integracion.md`: ocho integraciones verificadas. Datos medidos: JSON y PNG en `docs/evidencias-s14/` del backend.
+- Informe Playwright original completo y sin tokens: `docs/reporte-playwright.html` del backend. Abrirlo con un navegador después de descargarlo.
 
-## Puesta en marcha
+## Verificación final
 
-1. Iniciar Oracle local (1522/FREEPDB1) y Redis (6379).
-2. En DBeaver, conexión PharmaDB, ejecutar `docs/sql/volumen_pruebas.sql` y `docs/sql/verificar_volumen.sql` del backend. Solo esquema PHARMADB de desarrollo. Script idempotente, no es una migración.
-3. Backend: `mvnw.cmd package -DskipTests`; `java -jar target/PharmaBackend-0.0.1-SNAPSHOT.jar --server.port=8081`. Perfil dev, SQL visible. Mantener la clave JWT fuera del repositorio.
-4. Frontend: `npm ci`; `npx ng serve --proxy-config proxy.conf.json`. SPA: http://localhost:4200. El proxy apunta a 8081. En producción se conserva el puerto 8082 detrás de Nginx.
-5. Para repetir mediciones con caché vacía sin borrar otras claves, usar un valor nuevo para `SPRING_CACHE_REDIS_KEY_PREFIX` al arrancar la instancia de pruebas. Esta evidencia usó `s14-evidencia::`.
+Comando: `npx playwright test --repeat-each=3`. Resultado definitivo: **7/7, 7/7 y 7/7; 21/21**, sin omitidas, inestables ni reintentos. Cada caso vigila errores JavaScript y respuestas API 5xx; ambos controles terminaron en cero. La primera corrida de estabilidad falló al comparar productos distintos por nombre parcial (INC-05); se corrigió y se ejecutó otra vez la suite completa antes de aceptar el resultado final.
 
-## Resultados medidos
+Matriz: **8/8**, con administrador y vendedor. Se verificó el stock sin F5, el incremento del reporte, los eventos de venta y precio con usuario/requestId, y un vencimiento real del JWT de un minuto durante la venta; al reingresar volvió a `/ventas/nueva`. Se restauró después el TTL normal de 60 minutos y el precio del producto de prueba.
 
-- Carga en DBeaver: 5.000 productos y 20.000 ventas nuevas sin detalle. Totales: 5.017 y 20.015.
-- Página 0 de Productos: 20 filas, 5.170 bytes, 695,44 ms. Primera petición de esa clave de caché. Son mediciones puntuales de desarrollo, no una media ni una comparación de rendimiento antes/después.
-- Tamaño 100: 100 filas; página 249: 20 filas. La última página real es 250: 17 filas, 50,97 ms. La guía supone 5.000 filas; se conservaron los 17 productos preexistentes.
-- Tamaño 500, campo no permitido y página negativa: HTTP 409. El número de estado se conserva en el protocolo y no aparece en los mensajes visuales.
-- Ventas del 01 al 12 de noviembre: 16.562 coincidencias, 829 páginas de 20. Las ventas sintéticas sirven para el listado y no validan reportes comerciales.
-- Chromium: 8 verificaciones de paginación aprobadas, sin errores de JavaScript. Compilación Angular de producción aprobada (inicial: 379,55 kB).
-- Maven: 10 pruebas existentes aprobadas; empaquetado aprobado. No representan la suite del paso 9.
+Auditoría: el login fallido persiste en su propia transacción. Una venta rechazada después de modificar una primera línea hizo rollback: el stock y el número de eventos de venta se conservaron. La venta confirmada genera evento AFTER_COMMIT, y el evento de eliminación también se verificó. Administrador consulta la bitácora; vendedor/almacén reciben 403 y anónimo 401. Las columnas de las cuatro entidades guardan el usuario del token. La pantalla de edición del producto y el comprobante muestran el usuario correspondiente.
 
-## Código de la guía y adaptaciones necesarias
+Maven: 10 pruebas existentes aprobadas. Compilación Angular de producción aprobada: paquete inicial 379,55 kB.
 
-Se incorporaron `Pagina`, `ConsultaPagina` y los tres archivos del paginador de la guía. Productos usa `input`, `rxResource`, `linkedSignal` y navegación con `queryParamsHandling: 'merge'`; se conservaron las columnas, acciones y `SiPermiso`. El mismo paginador se usa en Ventas.
+## Arranque y base de datos
 
-El proyecto anterior devolvía arreglos completos y paginaba en el navegador. Fue necesario añadir `PaginaResponseDTO`, `PaginacionUtil`, repositorios con `Pageable`, validación de tamaño 1-100 y listas blancas de orden. El desempate por id evita que filas con igual precio/stock cambien de posición. En Ventas se pagina antes de cargar los detalles: no se usa un fetch de colección que pagine en memoria.
+1. Iniciar Oracle en localhost:1522/FREEPDB1 y Redis en 6379.
+2. Configurar los secretos locales; no publicarlos. La SPA de desarrollo usa el proxy existente hacia la API 8081. El perfil de producción conserva 8082 detrás de Nginx.
+3. Backend: `mvnw.cmd package -DskipTests` y `java -jar target/PharmaBackend-0.0.1-SNAPSHOT.jar --server.port=8081`.
+4. **Solo la primera vez sobre la base de desarrollo heredada sin historial:** arrancar con la variable `FLYWAY_BASELINE_ON_MIGRATE=true`. El esquema existente se registra como baseline 3 y se ejecuta V4. Después retirar esa variable. El valor predeterminado es false. No se recrean tablas existentes ni se simulan migraciones V1 a V3 que este proyecto no tenía registradas.
+5. En DBeaver, conexión PharmaDB, ejecutar `docs/sql/comprobar_auditoria.sql` y `docs/sql/historial_flyway.sql` del backend. Debe haber siete columnas de usuario, la tabla auditoria_eventos y un historial con baseline 3 y V4 correcta. El esquema se inspeccionó realmente en DBeaver y se conserva su captura.
+6. La carga de `docs/sql/volumen_pruebas.sql` es idempotente, solo para PHARMADB de desarrollo y posterior a V4; no es una migración. `docs/sql/verificar_volumen.sql` confirma 5.000 productos y 20.000 ventas sintéticas sin detalle. Estas ventas sirven para el listado y no validan reportes comerciales. Los datos heredados pueden conservar columnas de auditoría nulas: no se inventaron sus autores.
+7. Frontend: `npm ci`, `npx playwright install chromium`, `npm start`. Ejecutar `npm run e2e:estable`. El entorno probado usa Paracetamol 500 mg activo con al menos seis unidades; `E2E_PRODUCTO` permite indicar otro nombre exacto visible en la primera página. Cliente de prueba: un apellido Mamani. No usar productos distintos para la selección y la verificación.
+8. Para repetir la matriz, con ambos repositorios hermanos y la dependencia Playwright instalada: `node docs/verificar-integracion.cjs` desde el backend. Crea datos de desarrollo y una venta real. El modo `expiracion` requiere una instancia temporal con JWT_EXPIRACION_MINUTOS=1; restaurar después a 60. Los datos identificados de esta ejecución están en `docs/evidencias-s14/datos-integracion.json`.
 
-La guía ubica la auditoría en el paso 5, aunque su script menciona una migración V4 del paso 4. Para respetar el corte, el SQL omite `creado_por` y usa `fecha_registro`, el nombre real de la entidad local. La carga es idempotente y usa fechas y total constantes para reconocer sus propias ventas sin detalle. No se agregó V4 ni columnas de auditoría.
+No se ejecutó un vaciado global de Redis. Para aislar mediciones se usó un prefijo de caché propio. Los tiempos publicados son medidas puntuales locales con el estado de caché existente, no una media ni una comparación antes/después.
 
-Con `withComponentInputBinding`, los parámetros ausentes se entregan como undefined. Se transformaron orden y dirección a sus valores por defecto para que `/productos` y `/ventas` no envíen `undefined`. El `linkedSignal` consulta `hasValue()` antes de leer el recurso para poder mostrar errores sin lanzar una excepción. Se añadió selección explícita a las opciones del tamaño porque inicialmente el navegador mostraba 10 aunque la respuesta tenía 20.
+## Adaptaciones mínimas del código de la guía
 
-El filtro de categoría se conserva y ahora se aplica en el servidor, en lugar de filtrar solo la página visible. En Ventas se mantienen cliente, estado, desde, hasta, página, tamaño y orden en URL; Buscar aplica los controles y vuelve a la página inicial. No hay buscador de texto en estos listados, por lo que no corresponde debounceTime.
+Se copiaron el paginador, los modelos, la migración V4, AuditoriaConfig, la entidad y repositorio de eventos, EventoAuditoria, AuditoriaServiceImpl, AuditoriaListener y las siete pruebas. Se completaron las piezas que la guía pide describiendo sus contratos: DTO, interfaz y controlador de consulta de auditoría.
 
-El entorno de desarrollo usa el proxy existente `/api/v1`, y los mensajes visuales de error muestran solo la explicación sin código HTTP ni identificador de seguimiento; el backend conserva la trazabilidad.
+La API anterior devolvía arreglos completos: se añadió `PaginaResponseDTO`, `PaginacionUtil` y consultas con Pageable, tamaño 1-100, lista blanca de orden y desempate por id. Productos filtra categorías en servidor y Ventas conserva filtros, tamaño y orden en URL. La guía requiere auditoría desde el usuario del token; se completaron DTO y mappers, y saveAndFlush asegura que la respuesta de una actualización ya contenga modificadoPor.
 
-## Evidencias y repositorios
+Spring Boot 4 requiere el starter de Flyway y el módulo Oracle; se añadieron porque el proyecto no tenía Flyway configurado. La base heredada se baselinó en 3 y V4 se aplicó una vez. El SQL usa `fecha_registro`, que es el nombre real local. La carga sigue siendo idempotente.
 
-El PDF reúne el informe y las evidencias de este alcance. Los PNG completos y JSON de resultados están en `docs/evidencias-s14/` del backend. Las imágenes del PDF son recortes señalados, sin modificar los valores mostrados.
+En Angular se adaptaron rutas/importaciones y los valores predeterminados de query params; hasValue protege la lectura de recursos fallidos y selected sincroniza el tamaño visual. Se conservaron SiPermiso, la impresión y el flujo de revisión/confirmación de la venta. Las pruebas reflejan esa confirmación y seleccionan el producto exacto. Los mensajes visuales no muestran el número HTTP ni el identificador de error; la API mantiene su trazabilidad.
+
+## Enlaces
 
 - Backend: https://github.com/LeonardoTA/PharmaBackend/tree/feature/integracion-estabilizacion-Tequen
 - Frontend: https://github.com/LeonardoTA/PharmaFrontEnd/tree/feature/integracion-estabilizacion-Tequen
-- Ambas ramas conservan el trabajo S13. Backend no tenía develop: se creó desde la base S13 previa, sin cambiar main. La base develop existente del frontend se conserva.
+- PR backend: https://github.com/LeonardoTA/PharmaBackend/pull/2
+- PR frontend: https://github.com/LeonardoTA/PharmaFrontEnd/pull/5
+
+El backend creó develop desde la base S13 previa. El develop remoto del frontend conserva su base SPA y el PR también incluye las dependencias S11/S13 existentes; no se reescribieron ni se fusionaron esas ramas.
