@@ -42,7 +42,7 @@ public class ClienteServiceImpl implements ClienteService {
         cliente.setDireccion(t.getDireccion() != null ? t.getDireccion().trim() : null);
         cliente.setEstado(t.getEstado());
 
-        Cliente guardado = clienteRepository.save(cliente);
+        Cliente guardado = clienteRepository.saveAndFlush(cliente);
 
         return convertirResponse(guardado);
     }
@@ -72,7 +72,7 @@ public class ClienteServiceImpl implements ClienteService {
         cliente.setDireccion(t.getDireccion() != null ? t.getDireccion().trim() : null);
         cliente.setEstado(t.getEstado());
 
-        Cliente actualizado = clienteRepository.save(cliente);
+        Cliente actualizado = clienteRepository.saveAndFlush(cliente);
 
         return convertirResponse(actualizado);
     }
@@ -115,7 +115,9 @@ public class ClienteServiceImpl implements ClienteService {
                 cliente.getDireccion(),
                 cliente.getEstado(),
                 cliente.getFechaCreacion(),
-                cliente.getFechaModificacion()
+                cliente.getFechaModificacion(),
+                cliente.getCreadoPor(),
+                cliente.getModificadoPor()
         );
     }
 }

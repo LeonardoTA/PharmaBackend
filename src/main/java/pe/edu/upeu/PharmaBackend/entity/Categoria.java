@@ -9,6 +9,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
+@EntityListeners(org.springframework.data.jpa.domain.support.AuditingEntityListener.class)
 @Table(name = "categorias")
 @Getter @Setter
 @NoArgsConstructor
@@ -32,6 +33,13 @@ public class Categoria {
 
     @Column(name = "fecha_modificacion")
     private LocalDateTime fechaModificacion;
+
+    @org.springframework.data.annotation.CreatedBy
+    @Column(name = "creado_por", length = 50, updatable = false)
+    private String creadoPor;
+    @org.springframework.data.annotation.LastModifiedBy
+    @Column(name = "modificado_por", length = 50)
+    private String modificadoPor;
 
     @PrePersist
     public void prePersist() {

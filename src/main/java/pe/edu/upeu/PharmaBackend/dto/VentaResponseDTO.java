@@ -25,4 +25,5 @@ public class VentaResponseDTO {
     private BigDecimal total;
 
     private List<DetalleVentaResponseDTO> detalles;
+    private String creadoPor;
 }

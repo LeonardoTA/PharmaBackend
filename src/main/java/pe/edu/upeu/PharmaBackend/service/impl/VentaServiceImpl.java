@@ -1,5 +1,7 @@
 package pe.edu.upeu.PharmaBackend.service.impl;
 
+import org.springframework.context.ApplicationEventPublisher;
+import pe.edu.upeu.PharmaBackend.auditoria.EventoAuditoria;
 import pe.edu.upeu.PharmaBackend.dto.PaginaResponseDTO;
 import pe.edu.upeu.PharmaBackend.util.PaginacionUtil;
 import org.slf4j.Logger;
@@ -36,6 +38,7 @@ public class VentaServiceImpl implements VentaService {
     private static final Set<String> CAMPOS_ORDENABLES = Set.of("id", "fechaRegistro", "total", "estado");
     private static final String ORDEN_POR_DEFECTO = "fechaRegistro";
 
+    private final ApplicationEventPublisher eventos;
     private final VentaRepository ventaRepository;
     private final ClienteRepository clienteRepository;
     private final ProductoRepository productoRepository;
@@ -43,7 +46,8 @@ public class VentaServiceImpl implements VentaService {
     public VentaServiceImpl(
             VentaRepository ventaRepository,
             ClienteRepository clienteRepository,
-            ProductoRepository productoRepository) {
+            ProductoRepository productoRepository, ApplicationEventPublisher eventos) {
+        this.eventos = eventos;
 
         this.ventaRepository = ventaRepository;
         this.clienteRepository = clienteRepository;
@@ -100,6 +104,8 @@ public class VentaServiceImpl implements VentaService {
         venta.setTotal(total);
 
         Venta guardada = ventaRepository.save(venta);
+        eventos.publishEvent(EventoAuditoria.de("VENTA_REGISTRADA", "Venta", guardada.getId(),
+                "total=" + guardada.getTotal() + " | items=" + guardada.getDetalles().size()));
 
         return convertirResponse(guardada);
     }
@@ -177,7 +183,8 @@ public class VentaServiceImpl implements VentaService {
                 clienteNombre,
                 venta.getEstado().name(),
                 venta.getTotal(),
-                detalles
+                detalles,
+                venta.getCreadoPor()
         );
     }
 }

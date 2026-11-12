@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@EntityListeners(org.springframework.data.jpa.domain.support.AuditingEntityListener.class)
 @Table(name = "ventas")
 @Getter
 @Setter
@@ -47,6 +48,10 @@ public class Venta {
             orphanRemoval = true
     )
     private List<DetalleVenta> detalles = new ArrayList<>();
+
+    @org.springframework.data.annotation.CreatedBy
+    @Column(name = "creado_por", length = 50, updatable = false)
+    private String creadoPor;
 
     @PrePersist
     public void prePersist() {
