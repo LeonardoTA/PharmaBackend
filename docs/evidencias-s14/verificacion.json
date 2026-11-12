@@ -1,0 +1,38 @@
+{
+  "fecha": "2026-11-12",
+  "casos": [
+    {
+      "caso": "Productos: página del servidor, siguiente y F5 conservan URL",
+      "estado": "Aprobado"
+    },
+    {
+      "caso": "Productos: tamaño y orden reinician página, F5 conserva ambos",
+      "estado": "Aprobado"
+    },
+    {
+      "caso": "Productos: última página real y extremos deshabilitados",
+      "estado": "Aprobado"
+    },
+    {
+      "caso": "Productos: categoría filtra en servidor y reinicia página",
+      "estado": "Aprobado"
+    },
+    {
+      "caso": "Productos: conserva filas mientras carga y cancela consulta anterior",
+      "estado": "Aprobado"
+    },
+    {
+      "caso": "Ventas: filtros y página en URL; cambiar filtro vuelve al inicio",
+      "estado": "Aprobado"
+    },
+    {
+      "caso": "Ventas: resultado vacío, extremos y rango inválido sin código visible",
+      "estado": "Aprobado"
+    },
+    {
+      "caso": "Productos: error de límite legible, sin número ni identificador",
+      "estado": "Aprobado"
+    }
+  ],
+  "erroresJavascript": []
+}
