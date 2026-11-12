@@ -1,5 +1,7 @@
 package pe.edu.upeu.PharmaBackend.service.impl;
 
+import pe.edu.upeu.PharmaBackend.dto.PaginaResponseDTO;
+import pe.edu.upeu.PharmaBackend.util.PaginacionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
@@ -17,6 +19,7 @@ import pe.edu.upeu.PharmaBackend.repository.ProductoRepository;
 import pe.edu.upeu.PharmaBackend.service.service.ProductoService;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ProductoServiceImpl implements ProductoService {
@@ -127,6 +130,18 @@ public class ProductoServiceImpl implements ProductoService {
                 .stream()
                 .map(this::convertirResponse)
                 .toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "productos", key = "'pagina-' + #pagina + '-' + #tamanio + '-' + #ordenarPor + '-' + #direccion + '-' + #categoriaId")
+    public PaginaResponseDTO<ProductoResponseDTO> listar(
+            int pagina, int tamanio, String ordenarPor, String direccion, Long categoriaId) {
+        var pageable = PaginacionUtil.construir(
+                pagina, tamanio, ordenarPor, direccion,
+                Set.of("id", "nombre", "precio", "stock", "estado"), "nombre");
+        return PaginaResponseDTO.de(
+                productoRepository.listarPagina(categoriaId, pageable).map(this::convertirResponse));
     }
 
     private ProductoResponseDTO convertirResponse(Producto producto) {
