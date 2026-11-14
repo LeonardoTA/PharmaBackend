@@ -1,0 +1,378 @@
+{
+  "fecha": "13/11/2026 (America/Lima)",
+  "commitBackend": "d52d514",
+  "commitFrontend": "0783621",
+  "comando": "npx playwright test --repeat-each=3",
+  "pruebasDistintas": 12,
+  "ejecuciones": 36,
+  "aprobadas": 36,
+  "fallidas": 0,
+  "omitidas": 0,
+  "inestables": 0,
+  "reintentos": 0,
+  "erroresJavascript": 0,
+  "respuestas5xx": 0,
+  "duracionMs": 64287.969,
+  "resultados": [
+    {
+      "prueba": "una ruta protegida sin sesión lleva al login con returnUrl",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-14T01:31:36.095Z",
+      "duracionMs": 1046,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "credenciales incorrectas muestran el mensaje del backend",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-14T01:31:37.304Z",
+      "duracionMs": 1178,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "tras iniciar sesión vuelve a la página pedida",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-14T01:31:38.497Z",
+      "duracionMs": 1031,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "una ruta protegida sin sesión lleva al login con returnUrl",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-14T01:31:59.088Z",
+      "duracionMs": 769,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "credenciales incorrectas muestran el mensaje del backend",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-14T01:32:00.010Z",
+      "duracionMs": 866,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "tras iniciar sesión vuelve a la página pedida",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-14T01:32:00.893Z",
+      "duracionMs": 874,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "una ruta protegida sin sesión lleva al login con returnUrl",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-14T01:32:19.220Z",
+      "duracionMs": 763,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "credenciales incorrectas muestran el mensaje del backend",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-14T01:32:20.144Z",
+      "duracionMs": 868,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "tras iniciar sesión vuelve a la página pedida",
+      "archivo": "autenticacion.spec.ts",
+      "inicio": "2026-11-14T01:32:21.028Z",
+      "duracionMs": 939,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "E2E-09: venta sin productos no llega a confirmación ni envía POST",
+      "archivo": "autonoma.spec.ts",
+      "inicio": "2026-11-14T01:31:39.555Z",
+      "duracionMs": 3316,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "E2E-10: cliente nuevo aparece inmediatamente y permite registrar venta",
+      "archivo": "autonoma.spec.ts",
+      "inicio": "2026-11-14T01:31:42.883Z",
+      "duracionMs": 3062,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "E2E-11: cambiar filtro en página tres de Ventas vuelve al inicio y F5 conserva",
+      "archivo": "autonoma.spec.ts",
+      "inicio": "2026-11-14T01:31:45.958Z",
+      "duracionMs": 1596,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "E2E-12: admin consulta ventas auditadas y conserva filtros y página en URL",
+      "archivo": "autonoma.spec.ts",
+      "inicio": "2026-11-14T01:31:47.566Z",
+      "duracionMs": 1735,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "E2E-13: vendedor no ve Auditoría y la ruta directa muestra acceso denegado",
+      "archivo": "autonoma.spec.ts",
+      "inicio": "2026-11-14T01:31:49.316Z",
+      "duracionMs": 1374,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "E2E-09: venta sin productos no llega a confirmación ni envía POST",
+      "archivo": "autonoma.spec.ts",
+      "inicio": "2026-11-14T01:32:01.796Z",
+      "duracionMs": 2778,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "E2E-10: cliente nuevo aparece inmediatamente y permite registrar venta",
+      "archivo": "autonoma.spec.ts",
+      "inicio": "2026-11-14T01:32:04.587Z",
+      "duracionMs": 3032,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "E2E-11: cambiar filtro en página tres de Ventas vuelve al inicio y F5 conserva",
+      "archivo": "autonoma.spec.ts",
+      "inicio": "2026-11-14T01:32:07.633Z",
+      "duracionMs": 1460,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "E2E-12: admin consulta ventas auditadas y conserva filtros y página en URL",
+      "archivo": "autonoma.spec.ts",
+      "inicio": "2026-11-14T01:32:09.113Z",
+      "duracionMs": 1507,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "E2E-13: vendedor no ve Auditoría y la ruta directa muestra acceso denegado",
+      "archivo": "autonoma.spec.ts",
+      "inicio": "2026-11-14T01:32:10.641Z",
+      "duracionMs": 1073,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "E2E-09: venta sin productos no llega a confirmación ni envía POST",
+      "archivo": "autonoma.spec.ts",
+      "inicio": "2026-11-14T01:32:21.994Z",
+      "duracionMs": 2730,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "E2E-10: cliente nuevo aparece inmediatamente y permite registrar venta",
+      "archivo": "autonoma.spec.ts",
+      "inicio": "2026-11-14T01:32:24.736Z",
+      "duracionMs": 3002,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "E2E-11: cambiar filtro en página tres de Ventas vuelve al inicio y F5 conserva",
+      "archivo": "autonoma.spec.ts",
+      "inicio": "2026-11-14T01:32:27.752Z",
+      "duracionMs": 1490,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "E2E-12: admin consulta ventas auditadas y conserva filtros y página en URL",
+      "archivo": "autonoma.spec.ts",
+      "inicio": "2026-11-14T01:32:29.256Z",
+      "duracionMs": 1471,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "E2E-13: vendedor no ve Auditoría y la ruta directa muestra acceso denegado",
+      "archivo": "autonoma.spec.ts",
+      "inicio": "2026-11-14T01:32:30.740Z",
+      "duracionMs": 1208,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "flujo principal: el vendedor registra una venta y el stock baja",
+      "archivo": "flujo-venta.spec.ts",
+      "inicio": "2026-11-14T01:31:50.710Z",
+      "duracionMs": 4053,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "flujo principal: el vendedor registra una venta y el stock baja",
+      "archivo": "flujo-venta.spec.ts",
+      "inicio": "2026-11-14T01:32:11.735Z",
+      "duracionMs": 3098,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "flujo principal: el vendedor registra una venta y el stock baja",
+      "archivo": "flujo-venta.spec.ts",
+      "inicio": "2026-11-14T01:32:31.970Z",
+      "duracionMs": 4044,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "productos se paginan en el servidor con la página en la URL",
+      "archivo": "paginacion.spec.ts",
+      "inicio": "2026-11-14T01:31:54.781Z",
+      "duracionMs": 1454,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "productos se paginan en el servidor con la página en la URL",
+      "archivo": "paginacion.spec.ts",
+      "inicio": "2026-11-14T01:32:14.848Z",
+      "duracionMs": 1350,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "productos se paginan en el servidor con la página en la URL",
+      "archivo": "paginacion.spec.ts",
+      "inicio": "2026-11-14T01:32:36.032Z",
+      "duracionMs": 1371,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "el almacenero no ve Ventas y la URL directa es denegada",
+      "archivo": "permisos.spec.ts",
+      "inicio": "2026-11-14T01:31:56.255Z",
+      "duracionMs": 1172,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "el vendedor ve Productos sin botones de edición",
+      "archivo": "permisos.spec.ts",
+      "inicio": "2026-11-14T01:31:57.440Z",
+      "duracionMs": 978,
+      "worker": 0,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 1
+    },
+    {
+      "prueba": "el almacenero no ve Ventas y la URL directa es denegada",
+      "archivo": "permisos.spec.ts",
+      "inicio": "2026-11-14T01:32:16.214Z",
+      "duracionMs": 1248,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "el vendedor ve Productos sin botones de edición",
+      "archivo": "permisos.spec.ts",
+      "inicio": "2026-11-14T01:32:17.474Z",
+      "duracionMs": 1011,
+      "worker": 1,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 2
+    },
+    {
+      "prueba": "el almacenero no ve Ventas y la URL directa es denegada",
+      "archivo": "permisos.spec.ts",
+      "inicio": "2026-11-14T01:32:37.420Z",
+      "duracionMs": 1193,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    },
+    {
+      "prueba": "el vendedor ve Productos sin botones de edición",
+      "archivo": "permisos.spec.ts",
+      "inicio": "2026-11-14T01:32:38.626Z",
+      "duracionMs": 1085,
+      "worker": 2,
+      "estado": "Aprobado",
+      "reintentos": 0,
+      "corrida": 3
+    }
+  ]
+}

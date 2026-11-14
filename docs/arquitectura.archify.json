@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": { "title": "PharmaSoft: componentes y despliegue", "quality_profile": "showcase", "viewBox": [1200, 650] },
+  "components": [
+    { "id": "spa", "type": "frontend", "label": "PharmaSoft", "sublabel": "Angular · navegador", "pos": [40, 120], "size": [220, 90] },
+    { "id": "api", "type": "backend", "label": "PharmaBackend", "sublabel": "Spring Boot · JWT", "pos": [490, 120], "size": [220, 90] },
+    { "id": "oracle", "type": "database", "label": "Oracle FREEPDB1", "sublabel": "Ventas y auditoría", "pos": [940, 120], "size": [220, 90] },
+    { "id": "redis", "type": "database", "label": "Redis", "sublabel": "Caché de productos", "pos": [490, 400], "size": [220, 90] }
+  ],
+  "connections": [
+    { "from": "spa", "to": "api", "label": "HTTP · Bearer JWT" },
+    { "from": "api", "to": "oracle", "label": "JDBC · puerto 1522" },
+    { "from": "api", "to": "redis", "label": "TCP · puerto 6379", "labelDy": 24, "fromSide": "bottom", "toSide": "top" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Desarrollo demostrado", "items": ["SPA en 4200 y API en 8081", "Oracle y Redis en Docker"] },
+    { "dot": "emerald", "title": "Configuración de producción", "items": ["Nginx 8081 publica la SPA", "El proxy deriva la API a 8082"] }
+  ]
+}

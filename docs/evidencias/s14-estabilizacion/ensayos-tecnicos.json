@@ -1,0 +1,36 @@
+[
+  {
+    "ensayo": 1,
+    "duracionMs": 72806.8872,
+    "actor": "Agente: ensayo técnico automatizado de los seis bloques, sin narración oral",
+    "venta": {
+      "nombre": "ensayo-1",
+      "fecha": "2026-11-14T01:47:07.953Z",
+      "duracionMs": 6619.792500000003,
+      "ventaId": 20062,
+      "creadoPor": "vendedor",
+      "requestId": "4ed8957c",
+      "total": 9,
+      "stockAntes": 100,
+      "stockDespues": 98,
+      "tipo": "recorrido técnico automatizado; no sustituye validación manual del estudiante"
+    }
+  },
+  {
+    "ensayo": 2,
+    "duracionMs": 94744.3113,
+    "actor": "Agente: ensayo técnico automatizado de los seis bloques, sin narración oral",
+    "venta": {
+      "nombre": "ensayo-2",
+      "fecha": "2026-11-14T01:55:00.167Z",
+      "duracionMs": 8221.473799999998,
+      "ventaId": 20068,
+      "creadoPor": "vendedor",
+      "requestId": "8f744fbb",
+      "total": 9,
+      "stockAntes": 100,
+      "stockDespues": 98,
+      "tipo": "recorrido técnico automatizado; no sustituye validación manual del estudiante"
+    }
+  }
+]

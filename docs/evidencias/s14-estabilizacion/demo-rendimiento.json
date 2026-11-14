@@ -1,0 +1,108 @@
+{
+  "salud": {
+    "http": 200,
+    "cuerpo": {
+      "components": {
+        "db": {
+          "details": {
+            "database": "Oracle",
+            "validationQuery": "isValid()"
+          },
+          "status": "UP"
+        },
+        "diskSpace": {
+          "details": {
+            "total": 296182870016,
+            "free": 8661929984,
+            "threshold": 10485760,
+            "path": "C:\\Users\\graci\\IDE-Class\\Trabajos_Clase\\PharmaClass\\PharmaBackend\\.",
+            "exists": true
+          },
+          "status": "UP"
+        },
+        "livenessState": {
+          "status": "UP"
+        },
+        "ping": {
+          "status": "UP"
+        },
+        "readinessState": {
+          "status": "UP"
+        },
+        "redis": {
+          "details": {
+            "version": "7.4.12"
+          },
+          "status": "UP"
+        },
+        "ssl": {
+          "details": {
+            "expiringChains": [],
+            "invalidChains": [],
+            "validChains": []
+          },
+          "status": "UP"
+        }
+      },
+      "groups": [
+        "liveness",
+        "readiness"
+      ],
+      "status": "UP"
+    }
+  },
+  "hitsAntes": {
+    "http": 200,
+    "cuerpo": {
+      "availableTags": [
+        {
+          "tag": "cache.manager",
+          "values": [
+            "cacheManager"
+          ]
+        },
+        {
+          "tag": "name",
+          "values": [
+            "productos"
+          ]
+        }
+      ],
+      "description": "The number of times cache lookup methods have returned a cached (hit) or uncached (newly loaded or null) value (miss).",
+      "measurements": [
+        {
+          "statistic": "COUNT",
+          "value": 495
+        }
+      ],
+      "name": "cache.gets"
+    }
+  },
+  "hitsDespues": {
+    "http": 200,
+    "cuerpo": {
+      "availableTags": [
+        {
+          "tag": "cache.manager",
+          "values": [
+            "cacheManager"
+          ]
+        },
+        {
+          "tag": "name",
+          "values": [
+            "productos"
+          ]
+        }
+      ],
+      "description": "The number of times cache lookup methods have returned a cached (hit) or uncached (newly loaded or null) value (miss).",
+      "measurements": [
+        {
+          "statistic": "COUNT",
+          "value": 496
+        }
+      ],
+      "name": "cache.gets"
+    }
+  }
+}

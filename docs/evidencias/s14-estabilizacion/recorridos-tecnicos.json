@@ -1,0 +1,38 @@
+[
+  {
+    "nombre": "flujo-1",
+    "fecha": "2026-11-14T01:46:42.518Z",
+    "duracionMs": 5883.0264,
+    "ventaId": 20059,
+    "creadoPor": "vendedor",
+    "requestId": "b676019e",
+    "total": 9,
+    "stockAntes": 100,
+    "stockDespues": 98,
+    "tipo": "recorrido técnico automatizado; no sustituye validación manual del estudiante"
+  },
+  {
+    "nombre": "flujo-2",
+    "fecha": "2026-11-14T01:46:48.613Z",
+    "duracionMs": 5867.221100000001,
+    "ventaId": 20060,
+    "creadoPor": "vendedor",
+    "requestId": "33a631f3",
+    "total": 9,
+    "stockAntes": 100,
+    "stockDespues": 98,
+    "tipo": "recorrido técnico automatizado; no sustituye validación manual del estudiante"
+  },
+  {
+    "nombre": "flujo-3",
+    "fecha": "2026-11-14T01:46:54.696Z",
+    "duracionMs": 5962.0165,
+    "ventaId": 20061,
+    "creadoPor": "vendedor",
+    "requestId": "3e5767ba",
+    "total": 9,
+    "stockAntes": 100,
+    "stockDespues": 98,
+    "tipo": "recorrido técnico automatizado; no sustituye validación manual del estudiante"
+  }
+]

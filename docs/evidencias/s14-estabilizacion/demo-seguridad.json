@@ -1,0 +1,25 @@
+{
+  "nota": "Respuestas reales. Token de ensayo firmado localmente con exp en el pasado; no se publica el token.",
+  "tokenVencido": {
+    "http": 401,
+    "cuerpo": {
+      "timestamp": "2026-11-13T20:55:16.554130700",
+      "status": 401,
+      "error": "Unauthorized",
+      "message": "El token ha expirado. Inicie sesión nuevamente",
+      "path": "/api/v1/auditoria",
+      "validationErrors": null
+    }
+  },
+  "vendedorSinPermiso": {
+    "http": 403,
+    "cuerpo": {
+      "timestamp": "2026-11-13T20:55:16.580116500",
+      "status": 403,
+      "error": "Forbidden",
+      "message": "No tiene permisos para realizar esta operación",
+      "path": "/api/v1/auditoria",
+      "validationErrors": null
+    }
+  }
+}

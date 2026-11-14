@@ -1,0 +1,12 @@
+{
+  "nombre": "ensayo-2",
+  "fecha": "2026-11-14T01:55:00.167Z",
+  "duracionMs": 8221.473799999998,
+  "ventaId": 20068,
+  "creadoPor": "vendedor",
+  "requestId": "8f744fbb",
+  "total": 9,
+  "stockAntes": 100,
+  "stockDespues": 98,
+  "tipo": "recorrido técnico automatizado; no sustituye validación manual del estudiante"
+}

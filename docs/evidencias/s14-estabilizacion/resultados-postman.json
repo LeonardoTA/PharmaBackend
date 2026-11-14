@@ -1,0 +1,106 @@
+{
+  "fecha": "13/11/2026",
+  "duracionMs": 1146,
+  "peticiones": [
+    {
+      "caso": "Login admin",
+      "http": 200,
+      "duracionMs": 141,
+      "aserciones": [
+        {
+          "prueba": "HTTP 200",
+          "aprobada": true
+        }
+      ]
+    },
+    {
+      "caso": "Login vendedor",
+      "http": 200,
+      "duracionMs": 101,
+      "aserciones": [
+        {
+          "prueba": "HTTP 200",
+          "aprobada": true
+        }
+      ]
+    },
+    {
+      "caso": "Productos paginados",
+      "http": 200,
+      "duracionMs": 14,
+      "aserciones": [
+        {
+          "prueba": "HTTP 200",
+          "aprobada": true
+        }
+      ]
+    },
+    {
+      "caso": "Venta registrada",
+      "http": 201,
+      "duracionMs": 40,
+      "aserciones": [
+        {
+          "prueba": "HTTP 201",
+          "aprobada": true
+        }
+      ]
+    },
+    {
+      "caso": "Venta sin productos",
+      "http": 400,
+      "duracionMs": 26,
+      "aserciones": [
+        {
+          "prueba": "HTTP 400",
+          "aprobada": true
+        }
+      ]
+    },
+    {
+      "caso": "Auditoría sin autenticación",
+      "http": 401,
+      "duracionMs": 13,
+      "aserciones": [
+        {
+          "prueba": "HTTP 401",
+          "aprobada": true
+        }
+      ]
+    },
+    {
+      "caso": "Auditoría como vendedor",
+      "http": 403,
+      "duracionMs": 11,
+      "aserciones": [
+        {
+          "prueba": "HTTP 403",
+          "aprobada": true
+        }
+      ]
+    },
+    {
+      "caso": "Producto inexistente",
+      "http": 404,
+      "duracionMs": 17,
+      "aserciones": [
+        {
+          "prueba": "HTTP 404",
+          "aprobada": true
+        }
+      ]
+    },
+    {
+      "caso": "Tamaño de página fuera de rango",
+      "http": 409,
+      "duracionMs": 14,
+      "aserciones": [
+        {
+          "prueba": "HTTP 409",
+          "aprobada": true
+        }
+      ]
+    }
+  ],
+  "fallos": 0
+}
