@@ -1,0 +1,91 @@
+[
+  {
+    "caso": "productos20",
+    "ruta": "/productos?pagina=0&tamanio=20",
+    "status": 200,
+    "ms": 695.44,
+    "bytes": 5170,
+    "filas": 20,
+    "pagina": 0,
+    "tamanio": 20,
+    "totalElementos": 5017,
+    "totalPaginas": 251,
+    "ultima": false
+  },
+  {
+    "caso": "productos100",
+    "ruta": "/productos?pagina=0&tamanio=100",
+    "status": 200,
+    "ms": 78.12,
+    "bytes": 24367,
+    "filas": 100,
+    "pagina": 0,
+    "tamanio": 100,
+    "totalElementos": 5017,
+    "totalPaginas": 51,
+    "ultima": false
+  },
+  {
+    "caso": "productos249",
+    "ruta": "/productos?pagina=249&tamanio=20",
+    "status": 200,
+    "ms": 82.75,
+    "bytes": 4900,
+    "filas": 20,
+    "pagina": 249,
+    "tamanio": 20,
+    "totalElementos": 5017,
+    "totalPaginas": 251,
+    "ultima": false
+  },
+  {
+    "caso": "productosUltima",
+    "ruta": "/productos?pagina=250&tamanio=20",
+    "status": 200,
+    "ms": 50.97,
+    "bytes": 4595,
+    "filas": 17,
+    "pagina": 250,
+    "tamanio": 20,
+    "totalElementos": 5017,
+    "totalPaginas": 251,
+    "ultima": true
+  },
+  {
+    "caso": "limite",
+    "ruta": "/productos?pagina=0&tamanio=500",
+    "status": 409,
+    "ms": 35.3,
+    "bytes": 209,
+    "mensaje": "El tamaño de página debe estar entre 1 y 100."
+  },
+  {
+    "caso": "campo",
+    "ruta": "/productos?ordenarPor=noPermitido",
+    "status": 409,
+    "ms": 24.29,
+    "bytes": 206,
+    "mensaje": "El campo de ordenamiento no está permitido."
+  },
+  {
+    "caso": "paginaNegativa",
+    "ruta": "/productos?pagina=-1",
+    "status": 409,
+    "ms": 23.35,
+    "bytes": 203,
+    "mensaje": "La página debe ser mayor o igual a cero."
+  },
+  {
+    "caso": "ventas",
+    "ruta": "/ventas/buscar?desde=2026-11-01&hasta=2026-11-12&pagina=0&tamanio=20",
+    "status": 200,
+    "ms": 153.42,
+    "bytes": 3222,
+    "filas": 20,
+    "pagina": 0,
+    "tamanio": 20,
+    "totalElementos": 16562,
+    "totalPaginas": 829,
+    "ultima": false
+  }
+]

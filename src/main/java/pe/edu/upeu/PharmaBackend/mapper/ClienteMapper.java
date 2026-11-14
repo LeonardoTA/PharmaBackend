@@ -17,7 +17,9 @@ public class ClienteMapper {
                 cliente.getDireccion(),
                 cliente.getEstado(),
                 cliente.getFechaCreacion(),
-                cliente.getFechaModificacion()
+                cliente.getFechaModificacion(),
+                cliente.getCreadoPor(),
+                cliente.getModificadoPor()
         );
     }
 

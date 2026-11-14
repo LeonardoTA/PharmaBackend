@@ -1,0 +1,126 @@
+[
+  {
+    "ruta": "/api/v1/auth/login",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/categorias",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/productos?pagina=0&tamanio=20&ordenarPor=nombre&direccion=asc",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/productos?pagina=1&tamanio=20&ordenarPor=nombre&direccion=asc",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/categorias",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/productos?pagina=1&tamanio=20&ordenarPor=nombre&direccion=asc",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/productos?pagina=0&tamanio=50&ordenarPor=nombre&direccion=asc",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/productos?pagina=1&tamanio=50&ordenarPor=nombre&direccion=asc",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/productos?pagina=0&tamanio=50&ordenarPor=precio&direccion=asc",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/categorias",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/productos?pagina=0&tamanio=50&ordenarPor=precio&direccion=asc",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/productos?pagina=0&tamanio=20&ordenarPor=precio&direccion=asc",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/productos?pagina=250&tamanio=20&ordenarPor=precio&direccion=asc",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/productos?pagina=0&tamanio=20&ordenarPor=precio&direccion=asc",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/productos?pagina=1&tamanio=20&ordenarPor=precio&direccion=asc",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/productos?pagina=0&tamanio=20&ordenarPor=precio&direccion=asc&categoriaId=32",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/categorias",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/productos?pagina=0&tamanio=20&ordenarPor=precio&direccion=asc&categoriaId=32",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/categorias",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/productos?pagina=0&tamanio=20&ordenarPor=nombre&direccion=asc",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/productos?pagina=0&tamanio=20&ordenarPor=stock&direccion=asc",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/clientes?pagina=0&tamanio=100&ordenarPor=apellidos&direccion=asc",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/ventas/buscar?pagina=4&tamanio=20&ordenarPor=fechaRegistro&direccion=desc",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/ventas/buscar?pagina=0&tamanio=20&ordenarPor=fechaRegistro&direccion=desc&desde=2026-11-01&hasta=2026-11-12",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/ventas/buscar?pagina=1&tamanio=20&ordenarPor=fechaRegistro&direccion=desc&desde=2026-11-01&hasta=2026-11-12",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/clientes?pagina=0&tamanio=100&ordenarPor=apellidos&direccion=asc",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/ventas/buscar?pagina=1&tamanio=20&ordenarPor=fechaRegistro&direccion=desc&desde=2026-11-01&hasta=2026-11-12",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/ventas/buscar?pagina=0&tamanio=50&ordenarPor=fechaRegistro&direccion=desc&desde=2026-11-01&hasta=2026-11-12",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/ventas/buscar?pagina=0&tamanio=50&ordenarPor=total&direccion=asc&desde=2100-01-01&hasta=2100-01-02",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/categorias",
+    "status": 200
+  },
+  {
+    "ruta": "/api/v1/productos?pagina=0&tamanio=500&ordenarPor=nombre&direccion=asc",
+    "status": 409
+  }
+]

@@ -36,7 +36,8 @@ public class VentaMapper {
                 clienteNombre,
                 venta.getEstado() != null ? venta.getEstado().name() : null,
                 venta.getTotal(),
-                detalles
+                detalles,
+                venta.getCreadoPor()
         );
     }
 

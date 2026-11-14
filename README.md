@@ -1,6 +1,8 @@
 # PharmaBackend — API REST de PharmaSoft
 
-Sistema backend para la gestión de farmacia, ventas, catálogo de productos y clientes desarrollado con Spring Boot 3, Java 21, Spring Data JPA, Oracle Database, Redis Cache y Spring Security.
+Sistema backend para la gestión de farmacia, ventas, catálogo de productos y clientes desarrollado con Spring Boot 4, Java 25, Spring Data JPA, Oracle Database, Redis Cache y Spring Security.
+
+Actividad autónoma S14: [índice de evidencias](docs/README.md), [informe único](docs/Tequen_LP2_S14_Autonoma.pdf) y [video de respaldo](docs/evidencias/s14-estabilizacion/demostracion-respaldo.webm). Versiones de entrega: `v1.0-demo` en ambos repositorios. Los registros personales pendientes están señalados en el índice.
 
 ---
 

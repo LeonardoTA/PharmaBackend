@@ -1,0 +1,93 @@
+[
+  [
+    "INC-01",
+    "12/11/2026",
+    "Entorno E2E",
+    "Ejecutar npx playwright test con los navegadores iniciales.",
+    "Abrir Chromium y ejecutar siete casos.",
+    "Los siete casos no podían iniciar el navegador.",
+    "Alta",
+    "Playwright instalado requería Chromium 1234 y solo existía 1228.",
+    "Instalar Chromium requerido y declarar la dependencia reproducible.",
+    "frontend b6b67fe",
+    "Toda la suite; la corrida definitiva actual aprobó 36/36."
+  ],
+  [
+    "INC-02",
+    "12/11/2026",
+    "Productos / Ventas",
+    "Abrir el listado sin parámetros de orden.",
+    "Aplicar orden por defecto y devolver la primera página.",
+    "La consulta inicial se rechazaba por orden no permitido.",
+    "Alta",
+    "withComponentInputBinding asignaba undefined a inputs ausentes, reemplazando el inicializador.",
+    "Transformaciones de los inputs aplican valores por defecto.",
+    "frontend bb8987f y 88a30da",
+    "Caso de paginación y verificación del avance (URL y F5)."
+  ],
+  [
+    "INC-03",
+    "12/11/2026",
+    "Paginador compartido",
+    "Abrir el primer listado y comparar selector Filas con la respuesta.",
+    "Filas 20 para una página de 20.",
+    "El selector mostraba 10.",
+    "Media",
+    "El value se aplicaba antes de construir las opciones del select.",
+    "Selected explícito en cada opción.",
+    "frontend f8893b3",
+    "Verificación de tamaño y captura del avance; E2E de paginación."
+  ],
+  [
+    "INC-04",
+    "12/11/2026",
+    "Guion de integración",
+    "Ejecutar I-06 en docs/verificar-integracion.cjs.",
+    "Editar precio y comprobar su persistencia.",
+    "El guion se detenía al localizar Precio; luego comparaba 4.50 como texto con 4.5.",
+    "Baja",
+    "Etiqueta incompleta del selector y comparación textual de números.",
+    "Usar Precio (S/) exacto y comparación numérica.",
+    "backend 095a402",
+    "Guion de matriz I-06; matriz final 8/8. No era un defecto del CRUD."
+  ],
+  [
+    "INC-05",
+    "12/11/2026",
+    "Prueba del flujo de venta",
+    "Ejecutar la primera suite repetida con varios productos llamados Paracetamol.",
+    "Comparar el stock del mismo producto vendido.",
+    "18/21: la prueba comparaba la fila de otro producto con stock diferente.",
+    "Alta",
+    "Selector por nombre parcial, ambiguo frente a variantes e inactivo.",
+    "Seleccionar y comprobar nombre exacto de la misma fila.",
+    "frontend 41695ff",
+    "Caso flujo principal; 21/21 tras corregir y 36/36 en la ampliación."
+  ],
+  [
+    "INC-06",
+    "13/11/2026",
+    "Auditoría SPA",
+    "Inspeccionar app.routes.ts y menú en frontend 228d4c9.",
+    "Existencia de /auditoria protegida, tabla, filtros y paginación.",
+    "No existían ruta ni opción de menú; solo había API.",
+    "Alta",
+    "La actividad práctica anterior no incluía todavía la página autónoma.",
+    "Crear página lazy, permisoGuard, menú por permiso y Paginador compartido.",
+    "frontend eed3cfb",
+    "E2E-12 y E2E-13. Hallazgo por inspección, no se atribuye una captura previa inexistente."
+  ],
+  [
+    "INC-07",
+    "13/11/2026",
+    "Filtro de Auditoría",
+    "Ejecutar E2E-12 con getByLabel Acción exacto.",
+    "Seleccionar la acción por su nombre accesible.",
+    "Timeout al localizar el select; primera corrida 11/12.",
+    "Media",
+    "El texto accesible de la etiqueta incluía el texto de las opciones.",
+    "Añadir aria-label explícito Acción al select.",
+    "frontend eed3cfb",
+    "E2E-12 pasó tras la corrección y en las tres repeticiones finales."
+  ]
+]

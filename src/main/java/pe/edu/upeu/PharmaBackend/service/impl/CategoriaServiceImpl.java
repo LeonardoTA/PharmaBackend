@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.context.ApplicationEventPublisher;
+import pe.edu.upeu.PharmaBackend.auditoria.EventoAuditoria;
 import org.springframework.transaction.annotation.Transactional;
 import pe.edu.upeu.PharmaBackend.dto.CategoriaRequestDTO;
 import pe.edu.upeu.PharmaBackend.dto.CategoriaResponseDTO;
@@ -21,11 +23,13 @@ import java.util.List;
 public class CategoriaServiceImpl implements CategoriaService {
     private static final Logger LOG = LoggerFactory.getLogger(CategoriaServiceImpl.class);
 
+    private final ApplicationEventPublisher eventos;
     private final CategoriaRepository categoriaRepository;
     private final ProductoRepository productoRepository;
 
     public CategoriaServiceImpl(CategoriaRepository categoriaRepository,
-                                ProductoRepository productoRepository) {
+                                ProductoRepository productoRepository, ApplicationEventPublisher eventos) {
+        this.eventos = eventos;
         this.categoriaRepository = categoriaRepository;
         this.productoRepository = productoRepository;
     }
@@ -46,7 +50,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         categoria.setDescripcion(t.getDescripcion());
         categoria.setEstado(t.getEstado());
 
-        Categoria catCreada = categoriaRepository.save(categoria);
+        Categoria catCreada = categoriaRepository.saveAndFlush(categoria);
 
         return convertirResponse(catCreada);
     }
@@ -64,7 +68,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         categoria.setDescripcion(t.getDescripcion());
         categoria.setEstado(t.getEstado());
 
-        Categoria catActualizada = categoriaRepository.save(categoria);
+        Categoria catActualizada = categoriaRepository.saveAndFlush(categoria);
 
         return convertirResponse(catActualizada);
     }
@@ -95,6 +99,7 @@ public class CategoriaServiceImpl implements CategoriaService {
             throw new ReglaNegocioException("No se puede eliminar la categoría porque tiene productos asociados.");
         }
         categoriaRepository.delete(categoria);
+        eventos.publishEvent(EventoAuditoria.de("CATEGORIA_ELIMINADA", "Categoria", categoria.getId(), categoria.getNombre()));
     }
 
     @Override
@@ -118,7 +123,9 @@ public class CategoriaServiceImpl implements CategoriaService {
                 categoria.getDescripcion(),
                 categoria.getEstado(),
                 categoria.getFechaCreacion(),
-                categoria.getFechaModificacion()
+                categoria.getFechaModificacion(),
+                categoria.getCreadoPor(),
+                categoria.getModificadoPor()
         );
     }
 }

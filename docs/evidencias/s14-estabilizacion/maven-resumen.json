@@ -1,0 +1,30 @@
+{
+  "fecha": "13/11/2026",
+  "jdk": 25,
+  "pruebas": [
+    {
+      "name": "pe.edu.upeu.PharmaBackend.PharmaBackendApplicationTests",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "22.181"
+    },
+    {
+      "name": "pe.edu.upeu.PharmaBackend.security.JwtServiceTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.348"
+    },
+    {
+      "name": "pe.edu.upeu.PharmaBackend.security.PermisosPorRolTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.021"
+    }
+  ]
+}

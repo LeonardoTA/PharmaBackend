@@ -1,0 +1,47 @@
+09:11:39.154 DEBUG [046ffc2b] org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.categoria_id,
+        c1_0.id,
+        c1_0.descripcion,
+        c1_0.estado,
+        c1_0.fecha_creacion,
+        c1_0.fecha_modificacion,
+        c1_0.nombre,
+        p1_0.descripcion,
+        p1_0.estado,
+        p1_0.fecha_creacion,
+        p1_0.fecha_modificacion,
+        p1_0.nombre,
+        p1_0.precio,
+        p1_0.stock 
+    from
+        productos p1_0 
+    join
+        categorias c1_0 
+            on c1_0.id=p1_0.categoria_id 
+    where
+        (
+            ? is null 
+            or c1_0.id=?
+        ) 
+    order by
+        p1_0.nombre,
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+09:11:39.187 DEBUG [046ffc2b] org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        productos p1_0 
+    join
+        categorias c1_0 
+            on c1_0.id=p1_0.categoria_id 
+    where
+        (
+            ? is null 
+            or c1_0.id=?
+        )

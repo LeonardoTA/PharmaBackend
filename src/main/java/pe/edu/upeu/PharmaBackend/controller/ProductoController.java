@@ -1,5 +1,6 @@
 package pe.edu.upeu.PharmaBackend.controller;
 
+import pe.edu.upeu.PharmaBackend.dto.PaginaResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,13 @@ public class ProductoController {
 
     // Listado de productos
     @GetMapping
-    public ResponseEntity<Iterable<ProductoResponseDTO>> findAll() {
-        return ResponseEntity.ok(
-                productoService.readAll()
-        );
+    public ResponseEntity<PaginaResponseDTO<ProductoResponseDTO>> findAll(
+            @RequestParam(defaultValue = "0") int pagina,
+            @RequestParam(defaultValue = "20") int tamanio,
+            @RequestParam(defaultValue = "nombre") String ordenarPor,
+            @RequestParam(defaultValue = "asc") String direccion,
+            @RequestParam(required = false) Long categoriaId) {
+        return ResponseEntity.ok(productoService.listar(pagina, tamanio, ordenarPor, direccion, categoriaId));
     }
 
     @GetMapping("/{id}")

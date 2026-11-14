@@ -1,0 +1,72 @@
+{
+  "fecha": "2026-11-14T01:44:10.863Z",
+  "categoriaEliminada": {
+    "id": 213,
+    "fecha": "2026-11-13T20:44:10.553922",
+    "usuario": "admin",
+    "accion": "CATEGORIA_ELIMINADA",
+    "entidad": "Categoria",
+    "entidadId": 55,
+    "detalle": "Cuidado natural",
+    "requestId": "74eb1ecf"
+  },
+  "eliminacionRechazada": {
+    "estado": 409,
+    "antes": 1,
+    "despues": 1
+  },
+  "clienteRegistrado": {
+    "id": 211,
+    "fecha": "2026-11-13T20:44:09.128977",
+    "usuario": "admin",
+    "accion": "CLIENTE_REGISTRADO",
+    "entidad": "Cliente",
+    "entidadId": 37,
+    "detalle": "Cliente registrado",
+    "requestId": "8ef99e1e"
+  },
+  "actuator": {
+    "healthStatus": 200,
+    "health": {
+      "groups": [
+        "liveness",
+        "readiness"
+      ],
+      "status": "UP"
+    },
+    "cacheStatus": 200,
+    "cache": {
+      "availableTags": [
+        {
+          "tag": "result",
+          "values": [
+            "hit",
+            "miss",
+            "pending"
+          ]
+        },
+        {
+          "tag": "cache.manager",
+          "values": [
+            "cacheManager"
+          ]
+        },
+        {
+          "tag": "name",
+          "values": [
+            "productos"
+          ]
+        }
+      ],
+      "description": "The number of times cache lookup methods have returned a cached (hit) or uncached (newly loaded or null) value (miss).",
+      "measurements": [
+        {
+          "statistic": "COUNT",
+          "value": 1329
+        }
+      ],
+      "name": "cache.gets"
+    }
+  },
+  "totalProductos": 5020
+}

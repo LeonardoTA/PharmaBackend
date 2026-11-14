@@ -1,0 +1,2 @@
+20:55:06.559 INFO  [8f744fbb] p.e.u.P.s.impl.AuditoriaServiceImpl - Auditoría VENTA_REGISTRADA | Venta 20068 | usuario=vendedor
+20:55:06.567 INFO  [8f744fbb] p.e.u.P.config.RequestIdFilter - POST /api/v1/ventas -> 201 (64 ms)

@@ -1,0 +1,103 @@
+{
+  "filas": [
+    {
+      "id": "I-01",
+      "resultado": "Cliente recién creado en la SPA aparece en la nueva venta",
+      "detalle": {
+        "clienteId": 13,
+        "creadoPor": "admin"
+      },
+      "estado": "Cumple"
+    },
+    {
+      "id": "I-02",
+      "resultado": "Solo se ofrecen productos activos con stock al precio vigente",
+      "detalle": {
+        "productoId": 5018,
+        "precio": 4.5,
+        "stock": 78,
+        "excluidos": [
+          5019,
+          5020
+        ]
+      },
+      "estado": "Cumple"
+    },
+    {
+      "id": "I-03",
+      "resultado": "El stock disminuye dos unidades sin F5",
+      "detalle": {
+        "stockAntes": 78,
+        "stockDespues": 76,
+        "ventaId": 20021
+      },
+      "estado": "Cumple"
+    },
+    {
+      "id": "I-04",
+      "resultado": "La venta incrementa el reporte del administrador",
+      "detalle": {
+        "productoId": 5018,
+        "cantidadAntes": 2,
+        "cantidadDespues": 4,
+        "total": 18
+      },
+      "estado": "Cumple"
+    },
+    {
+      "id": "I-05",
+      "resultado": "Evento de venta confirmado con usuario y requestId",
+      "detalle": {
+        "evento": {
+          "id": 18,
+          "fecha": "2026-11-12T11:35:49.15899",
+          "usuario": "vendedor",
+          "accion": "VENTA_REGISTRADA",
+          "entidad": "Venta",
+          "entidadId": 20021,
+          "detalle": "total=9.0 | items=1",
+          "requestId": "b322b50d"
+        }
+      },
+      "estado": "Cumple"
+    },
+    {
+      "id": "I-06",
+      "resultado": "Precio auditado con valores anterior y nuevo",
+      "detalle": {
+        "creadoPor": "admin",
+        "modificadoPor": "admin",
+        "evento": {
+          "id": 24,
+          "fecha": "2026-11-12T11:40:51.268004",
+          "usuario": "admin",
+          "accion": "PRECIO_MODIFICADO",
+          "entidad": "Producto",
+          "entidadId": 5018,
+          "detalle": "4.5 -> 4.75",
+          "requestId": "fc05e52b"
+        }
+      },
+      "estado": "Cumple"
+    },
+    {
+      "id": "I-07",
+      "resultado": "Vencimiento real: login y regreso a la nueva venta",
+      "detalle": {
+        "ttlSegundos": 60,
+        "returnUrl": "/ventas/nueva",
+        "jwtVencido": true
+      },
+      "estado": "Cumple"
+    },
+    {
+      "id": "I-08",
+      "resultado": "Cambiar fechas desde la página 5 vuelve a la primera",
+      "detalle": {
+        "url": "http://localhost:4200/ventas?pagina=0&tamanio=20&desde=2026-11-01&hasta=2026-11-12"
+      },
+      "estado": "Cumple"
+    }
+  ],
+  "erroresJavascript": []
+}

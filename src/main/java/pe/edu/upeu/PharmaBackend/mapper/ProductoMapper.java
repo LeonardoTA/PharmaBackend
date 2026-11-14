@@ -18,7 +18,9 @@ public class ProductoMapper {
                 producto.getCategoria() != null ? producto.getCategoria().getId() : null,
                 producto.getCategoria() != null ? producto.getCategoria().getNombre() : null,
                 producto.getFechaCreacion(),
-                producto.getFechaModificacion()
+                producto.getFechaModificacion(),
+                producto.getCreadoPor(),
+                producto.getModificadoPor()
         );
     }
 

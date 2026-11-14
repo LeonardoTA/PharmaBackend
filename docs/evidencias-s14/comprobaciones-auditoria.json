@@ -1,0 +1,54 @@
+{
+  "rollback": {
+    "status": 409,
+    "stockAntes": 76,
+    "stockDespues": 76,
+    "eventosAntes": 3,
+    "eventosDespues": 3
+  },
+  "loginFallido": {
+    "status": 401,
+    "evento": {
+      "id": 30,
+      "fecha": "2026-11-12T13:24:56.844424",
+      "usuario": "admin",
+      "accion": "LOGIN_FALLIDO",
+      "entidad": "Usuario",
+      "entidadId": null,
+      "detalle": null,
+      "requestId": "733e3588"
+    }
+  },
+  "acceso": {
+    "admin": 200,
+    "vendedor": 403,
+    "almacen": 403,
+    "anonimo": 401,
+    "tamanio500": 409
+  },
+  "columnas": {
+    "categoria": {
+      "id": 35,
+      "creadoPor": "admin",
+      "modificadoPor": "admin"
+    },
+    "cliente": {
+      "id": 13,
+      "creadoPor": "admin",
+      "modificadoPor": "admin"
+    },
+    "producto": {
+      "id": 5018,
+      "creadoPor": "admin",
+      "modificadoPor": "admin"
+    },
+    "venta": {
+      "id": 20021,
+      "creadoPor": "vendedor"
+    }
+  },
+  "eliminacion": {
+    "productoId": 5021,
+    "eventoRegistrado": true
+  }
+}
