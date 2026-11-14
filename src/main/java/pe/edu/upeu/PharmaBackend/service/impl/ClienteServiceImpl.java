@@ -1,6 +1,8 @@
 package pe.edu.upeu.PharmaBackend.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.context.ApplicationEventPublisher;
+import pe.edu.upeu.PharmaBackend.auditoria.EventoAuditoria;
 import org.springframework.transaction.annotation.Transactional;
 import pe.edu.upeu.PharmaBackend.dto.ClienteRequestDTO;
 import pe.edu.upeu.PharmaBackend.dto.ClienteResponseDTO;
@@ -13,9 +15,11 @@ import pe.edu.upeu.PharmaBackend.service.service.ClienteService;
 @Service
 public class ClienteServiceImpl implements ClienteService {
 
+    private final ApplicationEventPublisher eventos;
     private final ClienteRepository clienteRepository;
 
-    public ClienteServiceImpl(ClienteRepository clienteRepository) {
+    public ClienteServiceImpl(ClienteRepository clienteRepository, ApplicationEventPublisher eventos) {
+        this.eventos = eventos;
         this.clienteRepository = clienteRepository;
     }
 
@@ -44,6 +48,7 @@ public class ClienteServiceImpl implements ClienteService {
 
         Cliente guardado = clienteRepository.saveAndFlush(cliente);
 
+        eventos.publishEvent(EventoAuditoria.de("CLIENTE_REGISTRADO", "Cliente", guardado.getId(), "Cliente registrado"));
         return convertirResponse(guardado);
     }
 
